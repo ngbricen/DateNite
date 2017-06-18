@@ -1,7 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-us">
 <head>
+  <meta charset="utf-8">
 	<title>Date Night</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -21,9 +24,9 @@
    	</div>
    
    	<div class="col-md-3">
-    	<input type="text" class="form-control" placeholder="Name">
+    	<input type="text" class="form-control" id="userName" placeholder="Name">
 
-    	<input type="text" class="form-control" placeholder="Zip Code">
+    	<input type="text" class="form-control" id="zipCode" placeholder="Zip Code">
 
     	
    	</div>
@@ -36,34 +39,41 @@
 
 <div class="container">
 	<div class="row">
-            
-            <div class="col-lg-6">
-                <div class="panel panel-default events" id="movies">
-                <div class="panel-heading">Movies</div>
-                      <div class="panel-body">
-                      </div>
-                </div>                
-            </div>
+    <div class="col-lg-6">
+        <div class="panel panel-default events" id="movies">
+        <div class="panel-heading">Events</div>
+              <div class="panel-body">
+                <table class="table table-hover" id="event-table">
+                
+                <tbody >           
+                </tbody>
+                
+                </table>
+              </div>
+        </div>                
+    </div>
 
-            <div class="col-lg-6">
-                <div class="panel panel-default events" id="eats">
-                	<div class="panel-heading">Eats</div>
-                	<div class="panel-body"></div>
-                </div>
-            </div>
-
+    <div class="col-lg-6">
+        <div class="panel panel-default events" id="eats">
+        	<div class="panel-heading">Eats</div>
+        	<div class="panel-body"></div>
+        </div>
+    </div>
     </div>
 </div>
 
-<div class="container">
+<!-- <div class="container">
   
   <div class="panel panel-default">
     
     <div class="panel-footer">Panel Footer</div>
   </div>
-</div>
+</div> -->
 
 
-	
+<script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="assets/javascript/datenite.js"></script>    	
 </body>
 </html>
