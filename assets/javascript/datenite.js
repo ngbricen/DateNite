@@ -20,6 +20,7 @@
 // var yelpQueryURL = "https://api.yelp.com/v3/businesses/search?location=" ;
 
 //Defining Variables to call the Event Brite API
+var queryURL = "";
 var eventBriteQueryURL = "https://www.eventbriteapi.com/v3/events/search/"
 var eventBriteToken = "?token=56ZIJSBXO7WBDSTCMZE2&expand=venue"
 
@@ -41,46 +42,44 @@ var activityURL;
 var activityCategory;
 var activityDate;
 
-activityCategory = "Restaurant"
-eventBriteQueryURL = eventBriteQueryURL + eventBriteToken + zipCode + category;
+queryURL = eventBriteQueryURL + eventBriteToken + zipCode + category;
 // + "&filter_category=" + activityCategory;
 
+//Call EventBrite and DisplayEvents
+callEventBrite(queryURL);
 
-// Create AJAX call for the specific artist button being clicked
-$.ajax({
-  url: eventBriteQueryURL,
-  method: "GET",
-}).done(function(response) {
-  var results = response.events;
-
-  console.log(results);
-  console.log(results.length);
+function callEventBrite(queryURL){
+  // Create AJAX call for the specific artist button being clicked
   
-  // $("#results-here").empty();
-  //        // Looping over every returned results item
-  for (var i = 0; i < 10 ; i++) {
+  //Empty table
+  $("#event-table tbody").empty();
 
-    activityImage = results[i].logo.original.url;
-    activityName= results[i].name.text;
-    activityURL = results[i].url;
-    
-    //Some eventbrite events do not have categories
-    if (results[i].category !== null){
-      activityCategory = results[i].category.short_name;
-    }
+  $.ajax({
+    url: queryURL,
+    method: "GET",
+  }).done(function(response) {
+    var results = response.events;
 
-    activityDate = results[i].start.local;
+    console.log(results);
 
-    console.log(activityImage);
-    console.log(activityName);
-    console.log(activityURL);
-    console.log(activityCategory);
-    console.log(activityDate);
+    for (var i = 0; i < 10 ; i++) {
 
-    //Function to build the event html elements and add it to the event DIV control
-    addEventToControl(activityImage,activityName,activityURL,activityCategory);
-  }  
-});
+      activityImage = results[i].logo.original.url;
+      activityName= results[i].name.text;
+      activityURL = results[i].url;
+      
+      //Some eventbrite events do not have categories
+      if (results[i].category !== null){
+        activityCategory = results[i].category.short_name;
+      }
+
+      activityDate = results[i].start.local;
+
+      //Function to build the event html elements and add it to the event DIV control
+      addEventToControl(activityImage,activityName,activityURL,activityCategory);
+    }  
+  });
+}
 
 function addEventToControl(image,name,url,category){
     var row = $("<tr>");
@@ -97,14 +96,28 @@ function addEventToControl(image,name,url,category){
     //Setting all other images variables
     eventImage.addClass("image");
 
-
     //Adding row to the table
   row.append($("<td>" + "<img src='" + image +"' class='image'>" + "</td>"));
     row.append($("<td>" + "<a href='" + url + "' target='_blank'>" + name + "</a>" + "<p><strong>" + category + "<strong></td>"));
-    // row.insertCell(1).innerHTML = childSnapshot.val().role;
-    // row.insertCell(2).innerHTML = childSnapshot.val().startDate;
-    // row.insertCell(3).innerHTML = childSnapshot.val().monthlyRate;
-    console.log(row);
+
+    //console.log(row);
     $("#event-table tbody").append(row);
 }  
 
+//Actions when users enters a message
+$(".categories").on("click",function(event){
+  //Get the selection from the dropdown
+  var selection = $(this).attr("category-id");
+
+  //If the Selection is none
+  if (selection === "0"){
+     queryURL = eventBriteQueryURL + eventBriteToken + zipCode + category;
+     $("#events").text("Event");
+  }
+  else {
+    queryURL = eventBriteQueryURL + eventBriteToken + zipCode + category + "&categories=" + selection;
+    $("#events").html("Events<strong> - Filtered by " + $(this).text() + "</strong>");
+  }
+  
+  callEventBrite(queryURL);
+});
