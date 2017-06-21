@@ -41,8 +41,30 @@
 <div class="container">
 	<div class="row">
     <div class="col-lg-6">
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Categories
+        <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+         <!-- Note that the Category-id below is the actual ID from Event Brite which was retrieved by-->
+         <!--  running https://www.eventbriteapi.com/v3/categories/:id/?token=56ZIJSBXO7WBDSTCMZE2 -->
+          <li><a href="#" class="categories" category-id="0">None</a></li>
+          <li><a href="#" class="categories" category-id="103">Music</a></li>
+          <li><a href="#" class="categories" category-id="110">Food & Drink</a></li>
+          <li><a href="#" class="categories" category-id="104">Film & Media </a></li>
+          <li><a href="#" class="categories" category-id="105">Arts</a></li>
+          <li><a href="#" class="categories" category-id="102">Science & Tech</a></li>
+          <li><a href="#" class="categories" category-id="119">Hobbies</a></li>
+          <li><a href="#" class="categories" category-id="109">Travel & Outdoor</a></li>
+          <li><a href="#" class="categories" category-id="118">Auto, Boat & Air</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
         <div class="panel panel-default events" id="movies">
-        <div class="panel-heading">Events</div>
+        <div class="panel-heading" id="events">Events</div>
               <div class="panel-body">
                 <table class="table table-hover" id="event-table">
                 
@@ -71,11 +93,13 @@
   </div>
 </div> -->
 
-<script src="assets/javascript/login.js"></script>
+  <script src="assets/javascript/login.js"></script>
 
-<script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="assets/javascript/datenite.js"></script>    	
+  <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
 
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous">
+  </script>
+  <script type="text/javascript" src="assets/javascript/datenite.js"></script>   
+  <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script> 		
 </body>
 </html>
