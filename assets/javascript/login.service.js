@@ -57,7 +57,7 @@ var loginService = ( function()
 	//prompt the user for location data
 	function getLocation() 
 	{
-	    if (navigator.geolocation) 
+	    if( navigator.geolocation ) 
 	    {
 	        //first arg is success callback, second arg is failure callback
 	        navigator.geolocation.getCurrentPosition( createUser, showError );
@@ -71,6 +71,7 @@ var loginService = ( function()
 	//prove that we got a location
 	function createUser( tPos )
 	{  	
+		console.log( tPos );
 	   	//create a new user with the provided location
 	    user = new User( null, tPos.coords.latitude, tPos.coords.longitude );
 	    
