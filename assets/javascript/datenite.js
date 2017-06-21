@@ -97,7 +97,7 @@ function addEventToControl(image,name,url,category){
     eventImage.addClass("image");
 
     //Adding row to the table
-    row.append($("<td>" + "<img src='" + image +"' class='image'>" + "</td>"));
+  row.append($("<td>" + "<img src='" + image +"' class='image'>" + "</td>"));
     row.append($("<td>" + "<a href='" + url + "' target='_blank'>" + name + "</a>" + "<p><strong>" + category + "<strong></td>"));
 
     //console.log(row);
