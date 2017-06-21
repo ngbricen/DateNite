@@ -3,10 +3,17 @@
 //this might handle user log in and geolocation gathering
 //so that the user does not have to use zip code unless they are uptight about their geolocation
 
+//TODO 
+// store the user in session data so that the user isn't prompted 
+// every time the user refreshes the page
+
+// allow the user to refresh their location, in case it has changed?
+// does this happen in the background?
+
 //=======================
 //	Login
 //=======================
-var loginController = ( function()
+var loginService = ( function()
 {
 	//current user
 	var currentUser;
@@ -34,7 +41,14 @@ var loginController = ( function()
 	//return the current user ( for allowing global access ) 
 	function getUser()
 	{
-		return currentUser;
+		if( currentUser != null )
+		{
+			return currentUser;
+		}
+		else
+		{
+			console.log( "no user to return - current user is not defined" );
+		}
 	}
 
 	//=======================
@@ -87,6 +101,3 @@ var loginController = ( function()
 	    }
 	}
 })();
-
-//prompt the user as soon as this thing fires and save their input
-user = loginController.getLocation();
