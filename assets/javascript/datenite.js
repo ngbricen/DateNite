@@ -99,7 +99,7 @@ function addEventToControl(image,name,url,category){
 
 
     //Adding row to the table
-    row.append($("<td>" + "<img src='" + image +"' class='image'>" + "</td>"));
+  row.append($("<td>" + "<img src='" + image +"' class='image'>" + "</td>"));
     row.append($("<td>" + "<a href='" + url + "' target='_blank'>" + name + "</a>" + "<p><strong>" + category + "<strong></td>"));
     // row.insertCell(1).innerHTML = childSnapshot.val().role;
     // row.insertCell(2).innerHTML = childSnapshot.val().startDate;
