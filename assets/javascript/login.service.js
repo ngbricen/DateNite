@@ -5,6 +5,9 @@
 
 //TODO 
 //integrate the zip code API
+//zip code api key = sQ8TmdgmloK621rldEfKmRs6UEf6vc5Y3eSpr8MMwwTzxlUL09wn1YtVCI28V76Y
+//url for testing = https://www.zipcodeapi.com/rest/sQ8TmdgmloK621rldEfKmRs6UEf6vc5Y3eSpr8MMwwTzxlUL09wn1YtVCI28V76Y/info.json/30312/radians
+//ngbricen.github.io
 
 //=======================
 //	Login
@@ -13,6 +16,7 @@ var loginService = ( function()
 {
 	//current user
 	var currentUser;
+	var apiKeyZipCode = 'js-okLIlW7Iff1cWtt5AXRrTCDDv5LO0gspAe8VafEpvGBr94xK2pbV1PzwUklVBOkb';
 
 	//only the stuff that outside scripts can access
 	var publicAPI = 
@@ -58,7 +62,7 @@ var loginService = ( function()
 	    if( navigator.geolocation ) 
 	    {
 	        //first arg is success callback, second arg is failure callback
-	        navigator.geolocation.getCurrentPosition( createUser, showError );
+	        navigator.geolocation.getCurrentPosition( createUser, showLocationError );
 	    }
 	    else
 	    {
@@ -71,6 +75,20 @@ var loginService = ( function()
 	{
 		//contact the zip code api, then create user 
 		console.log( "your zip is " + tZipCode );
+
+		//build the request URL
+		var url = "https://www.zipcodeapi.com/rest/" + apiKeyZipCode + "/info.json/" + tZipCode + "/radians";
+		
+		//build request parameters
+		var requestParams = { 'url' : url, 'dataType' : 'json' };
+
+		//make the api call to zipcodeapi.com
+		$.ajax( requestParams ).done( function( tData )
+		{
+			console.log( tData );
+		});
+
+
 	}
 
 	//prove that we got a location
@@ -82,13 +100,10 @@ var loginService = ( function()
 	    
 	    return user;
 	   	//console.log( tPos.coords );
-	    //console.log( tPos.coords.latitude );
-	    //console.log( tPos.coords.longitude );
-	    //console.log( user );
 	}
 
 	//log possible errors
-	function showError( error ) 
+	function showLocationError( error ) 
 	{
 	    switch( error.code ) 
 	    {
