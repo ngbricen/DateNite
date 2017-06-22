@@ -4,11 +4,7 @@
 //so that the user does not have to use zip code unless they are uptight about their geolocation
 
 //TODO 
-// store the user in session data so that the user isn't prompted 
-// every time the user refreshes the page
-
-// allow the user to refresh their location, in case it has changed?
-// does this happen in the background?
+//integrate the zip code API
 
 //=======================
 //	Login
@@ -22,7 +18,8 @@ var loginService = ( function()
 	var publicAPI = 
 	{
 		getUser: getUser,
-		getLocation: getLocation
+		getLocation: getLocation,
+		getLocationByZip: getLocationByZip
 	}
 
 	//return this api to the global scope
@@ -31,11 +28,12 @@ var loginService = ( function()
 	//=======================
 	//	User Object
 	//=======================
-	function User( tName, tLatitude, tLongitude ) 
+	function User( tName, tLatitude, tLongitude, tZipCode = null ) 
 	{
 	    this.name = tName;
 	    this.latitude = tLatitude;
 	    this.longitude = tLongitude;
+	    this.zipCode = tZipCode;
 	}
 
 	//return the current user ( for allowing global access ) 
@@ -66,6 +64,13 @@ var loginService = ( function()
 	    {
 	    	console.log( "could not get geo location" );
 	    }
+	}
+
+	//getting the location using the users zip code
+	function getLocationByZip( tZipCode )
+	{
+		//contact the zip code api, then create user 
+		console.log( "your zip is " + tZipCode );
 	}
 
 	//prove that we got a location
