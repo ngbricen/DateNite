@@ -91,10 +91,11 @@ var loginService = ( function()
 			//create a new user with the returned data
 			createUser( tData );
 		});
-
-
 	}
 
+	//=======================
+	//	User Creation
+	//=======================
 	//prove that we got a location
 	function createUser( tPosition )
 	{  	
@@ -112,6 +113,9 @@ var loginService = ( function()
 	    return user;
 	}
 
+	//=======================
+	//	Error Reporting
+	//=======================
 	//log possible errors
 	function showLocationError( error ) 
 	{
