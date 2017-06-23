@@ -4,8 +4,6 @@
 //so that the user does not have to use zip code unless they are uptight about their geolocation
 
 //TODO 
-//integrate the zip code API
-//zip code api key = sQ8TmdgmloK621rldEfKmRs6UEf6vc5Y3eSpr8MMwwTzxlUL09wn1YtVCI28V76Y
 //url for testing = https://www.zipcodeapi.com/rest/sQ8TmdgmloK621rldEfKmRs6UEf6vc5Y3eSpr8MMwwTzxlUL09wn1YtVCI28V76Y/info.json/30312/radians
 //ngbricen.github.io
 
@@ -85,9 +83,6 @@ var loginService = ( function()
 		//make the api call to zipcodeapi.com
 		$.ajax( requestParams ).done( function( tData )
 		{
-			console.log( tData );
-			console.log( tData.lat );
-			console.log( tData.lng );
 			//create a new user with the returned data
 			createUser( tData );
 		});
