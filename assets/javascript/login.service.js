@@ -95,6 +95,7 @@ var loginService = ( function()
 	//prove that we got a location
 	function createUser( tPosition )
 	{  	
+		console.log( tPosition );
 		//check if the postition object has the 'coords' object
 		if( 'coords' in tPosition )
 		{
