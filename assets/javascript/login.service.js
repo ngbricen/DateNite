@@ -86,20 +86,30 @@ var loginService = ( function()
 		$.ajax( requestParams ).done( function( tData )
 		{
 			console.log( tData );
+			console.log( tData.lat );
+			console.log( tData.lng );
+			//create a new user with the returned data
+			createUser( tData );
 		});
 
 
 	}
 
 	//prove that we got a location
-	function createUser( tPos )
+	function createUser( tPosition )
 	{  	
-		console.log( tPos );
-	   	//create a new user with the provided location
-	    user = new User( null, tPos.coords.latitude, tPos.coords.longitude );
-	    
+		//check if the postition object has the 'coords' object
+		if( 'coords' in tPosition )
+		{
+	   		//create a new user with the provided location
+	    	user = new User( null, tPosition.coords.latitude, tPosition.coords.longitude );
+		}
+	    else
+    	{
+			user = new User( null, tPosition.lat, tPosition.lng, tPosition.zip_code );
+    	}
+
 	    return user;
-	   	//console.log( tPos.coords );
 	}
 
 	//log possible errors
