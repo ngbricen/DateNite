@@ -35,12 +35,15 @@ var category  = "&expand=category";
 // variables for both events and restaurants are the same
 var activityImage;
 var activityName;
-// var activityAddress;
-// var activityPhone;
 var activityURL;
-// var acivityRatings;
 var activityCategory;
 var activityDate;
+var activityHour;
+var activityMeridiem;
+var activityDateFormatted;
+var EventsWithinDays = 5;
+var dayDiff;
+var selection; 
 
 queryURL = eventBriteQueryURL + eventBriteToken + zipCode + category;
 // + "&filter_category=" + activityCategory;
@@ -49,7 +52,8 @@ queryURL = eventBriteQueryURL + eventBriteToken + zipCode + category;
 callEventBrite(queryURL);
 
 function callEventBrite(queryURL){
-  // Create AJAX call for the specific artist button being clicked
+  //Initialize Events Header
+  $("#events").text("Events Within " + EventsWithinDays + " days");
   
   //Empty table
   $("#event-table tbody").empty();
@@ -59,8 +63,6 @@ function callEventBrite(queryURL){
     method: "GET",
   }).done(function(response) {
     var results = response.events;
-
-    console.log(results);
 
     for (var i = 0; i < 10 ; i++) {
 
@@ -75,13 +77,23 @@ function callEventBrite(queryURL){
 
       activityDate = results[i].start.local;
 
+      // To calculate the months worked
+      dayDiff = moment(activityDate).diff(moment(), "days");
+
+      activityDateFormatted =  moment(activityDate).format("MM/DD/YY h:mmA");
+      activityHour =  moment(activityDate).format("h");
+      activityMeridiem =  moment(activityDate).format("A");
+
       //Function to build the event html elements and add it to the event DIV control
-      addEventToControl(activityImage,activityName,activityURL,activityCategory);
+      //Only if the event occurrs on the current day and occurs in the evening
+      if (dayDiff <= EventsWithinDays && activityHour >= 6 && activityMeridiem === "PM"){
+        addEventToControl(activityImage,activityName,activityURL,activityCategory,activityDateFormatted,dayDiff);
+      }
     }  
   });
 }
 
-function addEventToControl(image,name,url,category){
+function addEventToControl(image,name,url,category,date,dayDiff){
     var row = $("<tr>");
 
     //Adding Class to the row, which could be usd for an on click event
@@ -98,7 +110,10 @@ function addEventToControl(image,name,url,category){
 
     //Adding row to the table
     row.append($("<td>" + "<img src='" + image +"' class='image'>" + "</td>"));
-    row.append($("<td>" + "<a href='" + url + "' target='_blank'>" + name + "</a>" + "<p><strong>" + category + "<strong></td>"));
+    row.append($("<td>" + "<strong>" + date + "</strong>" 
+                        + "<p><a href='" + url + "' target='_blank'></p>" + name + "</a>" 
+                        + "<p><strong>" + category + "</strong>" 
+                        + "<p><strong>In " + dayDiff + " days</strong></td>"));
 
     //console.log(row);
     $("#event-table tbody").append(row);
@@ -107,16 +122,37 @@ function addEventToControl(image,name,url,category){
 //Actions when users enters a message
 $(".categories").on("click",function(event){
   //Get the selection from the dropdown
-  var selection = $(this).attr("category-id");
+  selection = $(this).attr("category-id");
 
   //If the Selection is none
   if (selection === "0"){
      queryURL = eventBriteQueryURL + eventBriteToken + zipCode + category;
-     $("#events").text("Event");
+     $("#events").text("Events Within " + EventsWithinDays + " days");
   }
   else {
     queryURL = eventBriteQueryURL + eventBriteToken + zipCode + category + "&categories=" + selection;
-    $("#events").html("Events<strong> - Filtered by " + $(this).text() + "</strong>");
+    $("#events").html("Events Within " + EventsWithinDays + " days<strong> - Filtered by " + $(this).text() + "</strong>");
+  }
+  
+  callEventBrite(queryURL);
+});
+
+//Actions when users enters a message
+$(".range").on("click",function(event){
+  //Get the selection from the dropdown
+  EventsWithinDays = $(this).attr("range-id");
+
+  //Get the selection from the dropdown
+  selection = $(this).attr("category-id");
+  
+  //If the Selection is none
+  if (selection === "0"){
+     queryURL = eventBriteQueryURL + eventBriteToken + zipCode + category;
+     $("#events").text("Events Within " + EventsWithinDays + " days");
+  }
+  else {
+    queryURL = eventBriteQueryURL + eventBriteToken + zipCode + category + "&categories=" + selection;
+    $("#events").html("Events Within " + EventsWithinDays + " days<strong> - Filtered by " + $(this).text() + "</strong>");
   }
   
   callEventBrite(queryURL);

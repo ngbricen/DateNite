@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
   <link rel="stylesheet" type="text/css" href="assets/css/date.css">
 </head>
 
@@ -43,20 +44,34 @@
     <div class="col-lg-6">
       <div class="dropdown">
         <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Categories
-        <span class="caret"></span></button>
-        <ul class="dropdown-menu">
-         <!-- Note that the Category-id below is the actual ID from Event Brite which was retrieved by-->
-         <!--  running https://www.eventbriteapi.com/v3/categories/:id/?token=56ZIJSBXO7WBDSTCMZE2 -->
-          <li><a href="#" class="categories" category-id="0">None</a></li>
-          <li><a href="#" class="categories" category-id="103">Music</a></li>
-          <li><a href="#" class="categories" category-id="110">Food & Drink</a></li>
-          <li><a href="#" class="categories" category-id="104">Film & Media </a></li>
-          <li><a href="#" class="categories" category-id="105">Arts</a></li>
-          <li><a href="#" class="categories" category-id="102">Science & Tech</a></li>
-          <li><a href="#" class="categories" category-id="119">Hobbies</a></li>
-          <li><a href="#" class="categories" category-id="109">Travel & Outdoor</a></li>
-          <li><a href="#" class="categories" category-id="118">Auto, Boat & Air</a></li>
-        </ul>
+          <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+           <!-- Note that the Category-id below is the actual ID from Event Brite which was retrieved by-->
+           <!--  running https://www.eventbriteapi.com/v3/categories/:id/?token=56ZIJSBXO7WBDSTCMZE2 -->
+            <li><a href="#" class="categories" category-id="0">None</a></li>
+            <li><a href="#" class="categories" category-id="103">Music</a></li>
+            <li><a href="#" class="categories" category-id="110">Food & Drink</a></li>
+            <li><a href="#" class="categories" category-id="104">Film & Media </a></li>
+            <li><a href="#" class="categories" category-id="105">Arts</a></li>
+            <li><a href="#" class="categories" category-id="102">Science & Tech</a></li>
+            <li><a href="#" class="categories" category-id="119">Hobbies</a></li>
+            <li><a href="#" class="categories" category-id="109">Travel & Outdoor</a></li>
+            <li><a href="#" class="categories" category-id="118">Auto, Boat & Air</a></li>
+          </ul>
+      </div>
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Date Within
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+             <!-- Note that the Category-id below is the actual ID from Event Brite which was retrieved by-->
+             <!--  running https://www.eventbriteapi.com/v3/categories/:id/?token=56ZIJSBXO7WBDSTCMZE2 -->
+              <li><a href="#" class="range" range-id="0">Today</a></li>
+              <li><a href="#" class="range" range-id="1">1 Night</a></li>
+              <li><a href="#" class="range" range-id="2">2 Nights</a></li>
+              <li><a href="#" class="range" range-id="3">3 Nights</a></li>
+              <li><a href="#" class="range" range-id="4">4 Nights</a></li>
+              <li><a href="#" class="range" range-id="5">5 Nights</a></li>
+            </ul>
       </div>
     </div>
   </div>
@@ -66,7 +81,7 @@
         <div class="panel panel-default events" id="movies">
         <div class="panel-heading" id="events">Events</div>
               <div class="panel-body">
-                <table class="table table-hover" id="event-table">
+                <table class="table table-hover" id="event-table" data-toggle="table">
                 
                 <tbody >           
                 </tbody>
@@ -97,8 +112,7 @@
 
   <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
 
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous">
-  </script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script type="text/javascript" src="assets/javascript/datenite.js"></script>   
   <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script> 		
 </body>
