@@ -114,8 +114,6 @@ function addEventToControl(image,name,url,category,date,dayDiff){
                         + "<p><a href='" + url + "' target='_blank'></p>" + name + "</a>" 
                         + "<p><strong>" + category + "</strong>" 
                         + "<p><strong>In " + dayDiff + " days</strong></td>"));
-
-    //console.log(row);
     $("#event-table tbody").append(row);
 }  
 

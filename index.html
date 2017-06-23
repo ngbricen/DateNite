@@ -15,28 +15,37 @@
 
 <body>
 <div class="container">
-  
-  <div class="jumbotron">
-  
-  <div class="row">
-  
-  	<div class="col-md-9">
-    	<h1>Git Out!</h1> 
-   	</div>
-   
-   	<div class="col-md-3">
-    	<input type="text" class="form-control" id="userName" placeholder="Name">
-      <button class="btn btn-primary btn-lg">Use Location</button>
-      <p>-or-</p>
-    	<input type="text" class="form-control" id="zipCode" placeholder="Zip Code">
+ 
+	<div class="jumbotron">
+	  	<div class="row">
+		  	<div class="col-md-9">
+		    	<h1>Git Out!</h1> 
+		   	</div>
+	   
+			<div class="col-md-3">
+				<div class="input-group">
+				  <input type="text" class="form-control" placeholder="Enter Name...">
+				      <span class="input-group-btn">
+				          <button class="btn btn-default" type="button">Enter</button>
+				      </span>
+					</div>
 
-    	
-   	</div>
-</div>
+				<div class="input-group">
+			  		<input type="text" class="form-control" id="zip-code-input" maxlength="5" placeholder="Enter Zip Code...">
+			  		<span class="input-group-btn">
+		      			<button class="btn btn-default" id="zip-code-button" type="button">Enter</button>
+			  		</span>
+				</div>
+				
+				<br/>
+
+				<button class="btn btn-primary btn-lg" id="login-button">Use Location</button>
+			</div>
+		</div>
 
     <p>Looking for fresh ideas of what to do...</p> 
-  
-  </div>
+
+	</div>
 </div>
 
 <div class="container">
@@ -100,20 +109,14 @@
     </div>
 </div>
 
-<!-- <div class="container">
-  
-  <div class="panel panel-default">
-    
-    <div class="panel-footer">Panel Footer</div>
-  </div>
-</div> -->
+<!-- LOGIN -->
+<script src="assets/javascript/login.service.js"></script>
+<script src="assets/javascript/login.controller.js"></script>
 
-  <script src="assets/javascript/login.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
 
-  <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
-
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-  <script type="text/javascript" src="assets/javascript/datenite.js"></script>   
-  <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script> 		
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="assets/javascript/datenite.js"></script>   
+<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script> 		
 </body>
 </html>
