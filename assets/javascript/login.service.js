@@ -3,7 +3,8 @@
 //this might handle user log in and geolocation gathering
 //so that the user does not have to use zip code unless they are uptight about their geolocation
 
-//TODO 
+//TODO
+//add error handling for api ajax request
 //url for testing = https://www.zipcodeapi.com/rest/sQ8TmdgmloK621rldEfKmRs6UEf6vc5Y3eSpr8MMwwTzxlUL09wn1YtVCI28V76Y/info.json/30312/radians
 //ngbricen.github.io
 
@@ -75,7 +76,7 @@ var loginService = ( function()
 		console.log( "your zip is " + tZipCode );
 
 		//build the request URL
-		var url = "https://www.zipcodeapi.com/rest/" + apiKeyZipCode + "/info.json/" + tZipCode + "/radians";
+		var url = "https://www.zipcodeapi.com/rest/" + apiKeyZipCode + "/info.json/" + tZipCode + "/degrees";
 		
 		//build request parameters
 		var requestParams = { 'url' : url, 'dataType' : 'json' };
@@ -105,6 +106,7 @@ var loginService = ( function()
 			user = new User( null, tPosition.lat, tPosition.lng, tPosition.zip_code );
     	}
 
+    	//returns the user at the global scope
 	    return user;
 	}
 
