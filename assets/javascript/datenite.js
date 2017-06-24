@@ -1,23 +1,6 @@
-/*
-  THE GOAL HERE IS TO GET DATA FROM BOTH EVENTBRITE AND YELP
-  1. EVENTBRITE EVENTS WILL BE DISPLAYED ON THE LEFT SIDE
-    --> EVENTBRITE SHOULD FILTER BY EVENT CATEGORIES THAT ARE IDEALS FOR DATES
-  2. WHILE YELP EVENTS WILL BE DISPLAYED ON THE RIGHT SIDE.  
-    --> YELP SHOULD FILTER ONLY RESTAURANTS
-  **ISSUE WITH YELP IS AUTHENTICATING WITH CORS, WHICH WE COULD NOT GET TO WORK
-  3. USERS WILL ENTER THEIR NAME AND ZIPCODE ON THE MAIN PAGE, AND EVENTS WILL BE DISPLAYED on both LEFT AND RIGHT
-    a. BASED ON THE ZIP CODE
-    b. BASE ON CURRENT DATE
-    c. BASE ON EVENTS THAT START AFTER 6PM (AS WE COULD THE APP DATE NITE)
-  4. IT WOULD BE GREAT TO ADD FILTERS TO ALLOW USERS TO FILTER EVENTS BY CATEGORY
-  5. WILL BE GREAT TO ADD PAGINATION IF YOU GET MORE THAN 10 RESULTS
-  6. WE STILL NEED HELP WITH STYLING, ADDING A SUBMIT BUTTON, PLACING IT ALL IN A FORM
-    -->NOTE THAT WE DON"T HAVE TO USE JUMBOTRON FOR HEADER, SO OPEN TO IDEAS HERE
-
-*/
 //We had some issues getting yelp to authenticate with "CORS"
-// var yelpToken = "Bearer MFCkuq78C-cEfVRr6FNy3rn6fbzV98ThKWw2kz7QVGzakaN6vQWNyhKtBT0vD9edDTmu_W_zjeRggudF-LltV7vwfxppBVdrzvk9uBskssdh3eS8Avr6VI2odX1FWXYx"
-// var yelpQueryURL = "https://api.yelp.com/v3/businesses/search?location=" ;
+var yelpToken = "Bearer MFCkuq78C-cEfVRr6FNy3rn6fbzV98ThKWw2kz7QVGzakaN6vQWNyhKtBT0vD9edDTmu_W_zjeRggudF-LltV7vwfxppBVdrzvk9uBskssdh3eS8Avr6VI2odX1FWXYx"
+var yelpQueryURL = "https://api.yelp.com/v3/businesses/search?location=" ;
 
 //Defining Variables to call the Event Brite API
 var queryURL = "";
@@ -44,11 +27,60 @@ var activityDateFormatted;
 var EventsWithinDays = 5;
 var dayDiff;
 var selection; 
+var eventCount = 0;
+var myEventDate;
+var myEventName;
+var myEventURL;
+//Hide My Events since there are none
+$("#myEvents").hide();
 
-queryURL = eventBriteQueryURL + eventBriteToken + zipCode + category;
-// + "&filter_category=" + activityCategory;
+//When user selects an event, need to add it to "My Events" section
+$(document).on("click",".specificEvent",function(){
+  eventCount++;
+
+  //Update the header
+  $("#myEventHeader").text("My Events (" + eventCount + ")");
+
+  //Only Display the My Event panel once, otherwise, it will be run on every selection
+  if (eventCount === 1){
+    $("#myEvents").show();    
+  }
+
+  //Adding rows to My Event Panel
+
+  //Get Key Variables from the click event
+  myEventDate = $(this).find("strong").text();
+  myEventName = $(this).find("a").text();
+  myEventURL = $(this).find("a").attr("href");;
+
+  var row = $("<tr>");
+
+  //Adding Class to the row, which could be usd for an on click event
+  row.addClass("myEvent");
+
+  row.append($("<td class = 'myDetails'>" + "<strong>" + myEventDate + " - </strong>" 
+                      + "<a href='" + myEventURL + "' target='_blank'>" 
+                      + myEventName + "</a>")); 
+  row.append($("<td class ='eventRemove'> <a href='#'><span class='glyphicon glyphicon-remove-sign'></span></a>"));
+
+  $("#myEvent-table tbody").append(row);
+
+});
+
+//Remove Rows when remove icon is clicked
+$(document).on("click",".eventRemove",function(){  
+  //Remove Row
+  $(this).closest('tr').remove();
+
+  //Update the header and counter
+  eventCount--;
+  $("#myEventHeader").text("My Events (" + eventCount + ")");
+  
+  return false;
+});
 
 //Call EventBrite and DisplayEvents
+queryURL = eventBriteQueryURL + eventBriteToken + zipCode + category;
 callEventBrite(queryURL);
 
 function callEventBrite(queryURL){
@@ -64,9 +96,15 @@ function callEventBrite(queryURL){
   }).done(function(response) {
     var results = response.events;
 
-    for (var i = 0; i < 10 ; i++) {
+    for (var i = 0; i < 40 ; i++) {
 
-      activityImage = results[i].logo.original.url;
+      if (results[i].logo.original !== null){
+        activityImage = results[i].logo.original.url;
+      }
+      else{
+        activityImage = "";
+      }
+      
       activityName= results[i].name.text;
       activityURL = results[i].url;
       
@@ -77,8 +115,8 @@ function callEventBrite(queryURL){
 
       activityDate = results[i].start.local;
 
-      // To calculate the months worked
-      dayDiff = moment(activityDate).diff(moment(), "days");
+      // To calculate the days difference and keep the positive value
+      dayDiff = Math.abs(moment(activityDate).diff(moment(), "days"));
 
       activityDateFormatted =  moment(activityDate).format("MM/DD/YY h:mmA");
       activityHour =  moment(activityDate).format("h");
@@ -86,11 +124,20 @@ function callEventBrite(queryURL){
 
       //Function to build the event html elements and add it to the event DIV control
       //Only if the event occurrs on the current day and occurs in the evening
-      if (dayDiff <= EventsWithinDays && activityHour >= 6 && activityMeridiem === "PM"){
+      if (dayDiff <=EventsWithinDays && activityHour >= 6 && activityMeridiem === "PM"){
         addEventToControl(activityImage,activityName,activityURL,activityCategory,activityDateFormatted,dayDiff);
       }
-    }  
+    }
+
+    //Include Pagination Features
+    $("#event-table").DataTable({
+        "lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
+         "bDestroy": true
+    });
+
+
   });
+
 }
 
 function addEventToControl(image,name,url,category,date,dayDiff){
@@ -109,19 +156,28 @@ function addEventToControl(image,name,url,category,date,dayDiff){
     eventImage.addClass("image");
 
     //Adding row to the table
-    row.append($("<td>" + "<img src='" + image +"' class='image'>" + "</td>"));
-    row.append($("<td>" + "<strong>" + date + "</strong>" 
-                        + "<p><a href='" + url + "' target='_blank'></p>" + name + "</a>" 
-                        + "<p><strong>" + category + "</strong>" 
-                        + "<p><strong>In " + dayDiff + " days</strong></td>"));
+    row.append($("<td class ='image'>" + "<img src='" + image +"' class='image'>" + "</td>"));
+    row.append($("<td class = 'details'>" + "<strong>" + date + "</strong>" 
+                        + "<p><a href='" + url + "' target='_blank'></p>" 
+                         + name + "</a>" 
+                        + "<strong> - " + category + "</strong>")); 
+                        // + "<p><strong>In " + dayDiff + " days</strong></td>"));
     $("#event-table tbody").append(row);
 }  
 
 //Actions when users enters a message
 $(".categories").on("click",function(event){
+  
   //Get the selection from the dropdown
   selection = $(this).attr("category-id");
 
+  //Replace the dropdownheader text and attribute
+  $("#categories").text($(this).text());
+  $("#categories").attr("category-id",selection);
+
+  //Get the Day range for what is preselected
+  EventsWithinDays = $("input[name=dayradio]:radio:checked").attr("day-id");
+  
   //If the Selection is none
   if (selection === "0"){
      queryURL = eventBriteQueryURL + eventBriteToken + zipCode + category;
@@ -136,12 +192,12 @@ $(".categories").on("click",function(event){
 });
 
 //Actions when users enters a message
-$(".range").on("click",function(event){
+$(".dayrange").on("click",function(event){
   //Get the selection from the dropdown
-  EventsWithinDays = $(this).attr("range-id");
+  EventsWithinDays = $(this).attr("day-id");
 
   //Get the selection from the dropdown
-  selection = $(this).attr("category-id");
+  selection =  $("#categories").attr("category-id");
   
   //If the Selection is none
   if (selection === "0"){

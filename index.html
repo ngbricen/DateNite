@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-2.2.4/dt-1.10.15/datatables.min.css"/>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -49,10 +50,33 @@
 </div>
 
 <div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel-group" id = "myEvents">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" href="#collapse1" event-count="0" id="myEventHeader">My Events</a>
+            </h4>
+          </div>
+          <div id="collapse1" class="panel-collapse collapse">
+            <div class="panel-body">
+              <div class="table-responsive">
+                <table class="table table-hover table-striped" id="myEvent-table" data-toggle="table">                  
+                  <tbody >           
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 	<div class="row">
     <div class="col-lg-6">
       <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Categories
+        <button class="btn btn-primary dropdown-toggle" type="button" id="categories" category-id="0" data-toggle="dropdown">Categories
           <span class="caret"></span></button>
           <ul class="dropdown-menu">
            <!-- Note that the Category-id below is the actual ID from Event Brite which was retrieved by-->
@@ -67,46 +91,44 @@
             <li><a href="#" class="categories" category-id="109">Travel & Outdoor</a></li>
             <li><a href="#" class="categories" category-id="118">Auto, Boat & Air</a></li>
           </ul>
-      </div>
-      <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Date Within
-            <span class="caret"></span></button>
-            <ul class="dropdown-menu">
-             <!-- Note that the Category-id below is the actual ID from Event Brite which was retrieved by-->
-             <!--  running https://www.eventbriteapi.com/v3/categories/:id/?token=56ZIJSBXO7WBDSTCMZE2 -->
-              <li><a href="#" class="range" range-id="0">Today</a></li>
-              <li><a href="#" class="range" range-id="1">1 Night</a></li>
-              <li><a href="#" class="range" range-id="2">2 Nights</a></li>
-              <li><a href="#" class="range" range-id="3">3 Nights</a></li>
-              <li><a href="#" class="range" range-id="4">4 Nights</a></li>
-              <li><a href="#" class="range" range-id="5">5 Nights</a></li>
-            </ul>
+          <!-- Days Options Start -->
+          <label class="radio-inline"><input type="radio" class="dayrange" name="dayradio" day-id="0">Today</label>
+          <label class="radio-inline"><input type="radio" class="dayrange" name="dayradio" day-id="1">Within 1 Night</label>
+          <label class="radio-inline"><input type="radio" class="dayrange" name="dayradio" day-id="3">3 Nights</label>
+          <label class="radio-inline"><input type="radio" class="dayrange" checked="true" name="dayradio" day-id="5">5 Nights</label>
+          <!-- Days Options End -->
       </div>
     </div>
   </div>
-
+  <br>
   <div class="row">
     <div class="col-lg-6">
         <div class="panel panel-default events" id="movies">
-        <div class="panel-heading" id="events">Events</div>
-              <div class="panel-body">
-                <table class="table table-hover" id="event-table" data-toggle="table">
+          <div class="panel-heading" id="events">Events</div>
+          <div class="panel-body">
+            <div class="table-responsive">
+              <table class="table table-hover table-striped" id="event-table" data-toggle="table">
+                <thead>
+                    <tr>
+                        <th>Pics</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
                 
                 <tbody >           
                 </tbody>
-                
-                </table>
-              </div>
-        </div>                
+              </table>
+            </div>
+          </div>                
+        </div>
     </div>
-
     <div class="col-lg-6">
         <div class="panel panel-default events" id="eats">
         	<div class="panel-heading">Eats</div>
         	<div class="panel-body"></div>
         </div>
     </div>
-    </div>
+  </div>
 </div>
 
 <!-- LOGIN -->
@@ -117,6 +139,7 @@
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="assets/javascript/datenite.js"></script>   
-<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script> 		
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-2.2.4/dt-1.10.15/datatables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>    
 </body>
 </html>
