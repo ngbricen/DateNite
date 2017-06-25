@@ -17,7 +17,7 @@ var loginService = ( function()
 	var currentUser;
 	var apiKeyZipCode = 'js-okLIlW7Iff1cWtt5AXRrTCDDv5LO0gspAe8VafEpvGBr94xK2pbV1PzwUklVBOkb';
 	
-	//register the "onUserCreated" event
+	//register the "onUserCreated" which can be used by any other file
 	eventSystem.registerEvent( 'onUserCreated' );
 
 	//only the stuff that outside scripts can access
