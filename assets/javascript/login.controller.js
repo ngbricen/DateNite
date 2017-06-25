@@ -1,5 +1,7 @@
 var loginController = ( function()
 {
+	var controller = this;
+
 	//=======================
 	//	Input
 	//=======================
@@ -15,6 +17,8 @@ var loginController = ( function()
 
 	//when the input field changes, check if it's valid input( using an anonymous function so that we can pass parameters )
 	zipCodeInput.addEventListener( 'input', function(){ validateZipCode( zipCodeInput.value.trim() ) } );
+
+	controller.addEventListener( 'onUserCreated', function(){  } );
 
 	//VIA BUTTON
 	//using an anonymous function so that we can pass a parameter
@@ -49,5 +53,4 @@ var loginController = ( function()
 		//soget the zipcode from our service
 		loginService.getLocationByZip( tZipCode );
 	}
-	
 })();
