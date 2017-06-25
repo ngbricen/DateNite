@@ -1,61 +1,32 @@
-//this will handle the yelp API
-var yelpToken = "Bearer MFCkuq78C-cEfVRr6FNy3rn6fbzV98ThKWw2kz7QVGzakaN6vQWNyhKtBT0vD9edDTmu_W_zjeRggudF-LltV7vwfxppBVdrzvk9uBskssdh3eS8Avr6VI2odX1FWXYx"
-var yelpQueryURL = "https://api.yelp.com/v3/businesses/search?location=" ;
-var googlePlacesURL = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=restaurants+in+Sydney&key=AIzaSyAdmUNFEGU6RNQ-4TavaviCMlyWKX9q09k";
-var zipAPI = "https://www.zipcodeapi.com/rest/" + "js-okLIlW7Iff1cWtt5AXRrTCDDv5LO0gspAe8VafEpvGBr94xK2pbV1PzwUklVBOkb" + "/info.json/" + 30312 + "/degrees";
-var googlePath = "https://maps.googleapis.com/maps/api/place/textsearch/json";
-var googleAPIKey = 'AIzaSyAdmUNFEGU6RNQ-4TavaviCMlyWKX9q09k';
-//var url = googlePlacesURL + "30312";
-var requestParams = 
-{ 
+//TEST DATA
+var lat = 33.744751;
+var long = -84.375485;
+var googleLatLong = new google.maps.LatLng( lat, long );
 
-	"method" : "GET",
-	"url": googlePlacesURL,
-	"crossDomain" : true,
-	"method": "GET",
-	"dataType": "json",
-	"cache" : false,
-  // success : function(){ alert( 'yas' ); }
-  // "headers": {
-  //   "authorization": "Bearer MFCkuq78C-cEfVRr6FNy3rn6fbzV98ThKWw2kz7QVGzakaN6vQWNyhKtBT0vD9edDTmu_W_zjeRggudF-LltV7vwfxppBVdrzvk9uBskssdh3eS8Avr6VI2odX1FWXYx",
-  //   "cache-control": "no-cache",
-  // },
-  // beforeSend: function( xhr, settings ) { xhr.setRequestHeader('Authorization', 'Bearer MFCkuq78C-cEfVRr6FNy3rn6fbzV98ThKWw2kz7QVGzakaN6vQWNyhKtBT0vD9edDTmu_W_zjeRggudF-LltV7vwfxppBVdrzvk9uBskssdh3eS8Avr6VI2odX1FWXYx'); }
+var request = 
+{
+	location: googleLatLong,
+	radius: '5000',
+	types: ['restaurant']
 };
 
-gapi.load('client', start);
+service = new google.maps.places.PlacesService( document.createElement('div') );
+//service.nearbySearch( request, callback );
+service.nearbySearch( request, callback );
 
-var googleRequestParams =
+function callback( results, status ) 
 {
-	'path' : googlePath,
-	'params' : {
-		'query' : 'restaurants+in+Sydney',
+	console.log( results );
+	if ( status == google.maps.places.PlacesServiceStatus.OK )
+	{
+		for (var i = 0; i < results.length; i++) 
+		{
+			console.log( results[i].name );
+		}
 	}
 }
 
-function start() {
-  // 2. Initialize the JavaScript client library.
-  gapi.client.init({
-    'apiKey': googleAPIKey,
-    // Your API key will be automatically added to the Discovery Document URLs.
-    'discoveryDocs': ['https://people.googleapis.com/$discovery/rest'],
-  }).then(function() {
-    // 3. Initialize and make the API request.
-    return gapi.client.request( googleRequestParams );
-  }).then(function(response) {
-    console.log(response.result);
-  }, function(reason) {
-    console.log('Error: ' + reason.result.error.message);
-  });
-};
+//YELP API INFO
+//var yelpToken = "Bearer MFCkuq78C-cEfVRr6FNy3rn6fbzV98ThKWw2kz7QVGzakaN6vQWNyhKtBT0vD9edDTmu_W_zjeRggudF-LltV7vwfxppBVdrzvk9uBskssdh3eS8Avr6VI2odX1FWXYx"
+//var yelpQueryURL = "https://api.yelp.com/v3/businesses/search?location=" ;
 
-var restRequest = gapi.client.request( googleRequestParams );
-
-// GOOGLE API
-// https://maps.googleapis.com/maps/api/place/textsearch/json?query=restaurants+in+Sydney&key=AIzaSyAdmUNFEGU6RNQ-4TavaviCMlyWKX9q09k
-
-//Standard ajax
-// $.ajax( requestParams ).done( function( tData )
-// {
-// 	console.log( tData );
-// });
