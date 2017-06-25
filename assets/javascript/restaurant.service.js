@@ -31,7 +31,7 @@ function callback( results, status )
 			//console.log( results[i].name );
 		}
 
-		console.log( dateRestaurants );
+		//console.log( dateRestaurants );
 	}
 }
 

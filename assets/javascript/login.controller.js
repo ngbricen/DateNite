@@ -18,7 +18,8 @@ var loginController = ( function()
 	//when the input field changes, check if it's valid input( using an anonymous function so that we can pass parameters )
 	zipCodeInput.addEventListener( 'input', function(){ validateZipCode( zipCodeInput.value.trim() ) } );
 
-	controller.addEventListener( 'onUserCreated', function(){  } );
+	//subscribe to the custom onUserCreated event
+	eventSystem.addEventListener( 'onUserCreated', function(){ userCreated( user ) } );
 
 	//VIA BUTTON
 	//using an anonymous function so that we can pass a parameter
@@ -52,5 +53,10 @@ var loginController = ( function()
 		//assuming we've made it this far - the zipcode should be a valid zipcode
 		//soget the zipcode from our service
 		loginService.getLocationByZip( tZipCode );
+	}
+
+	function userCreated( tUser )
+	{
+		console.log( tUser );
 	}
 })();
