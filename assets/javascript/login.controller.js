@@ -19,7 +19,7 @@ var loginController = ( function()
 	zipCodeInput.addEventListener( 'input', function(){ validateZipCode( zipCodeInput.value.trim() ) } );
 
 	//subscribe to the custom onUserCreated event
-	eventSystem.addEventListener( 'onUserCreated', function(){ userCreated( user ) } );
+	eventSystem.addEventListener( 'onUserCreated', function(){ restaurantService.googleSearchNearby( user ) } );
 
 	//VIA BUTTON
 	//using an anonymous function so that we can pass a parameter
