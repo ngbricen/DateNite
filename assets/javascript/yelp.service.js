@@ -3,10 +3,12 @@ var lat = 33.744751;
 var long = -84.375485;
 var googleLatLong = new google.maps.LatLng( lat, long );
 
+var dateRestaurants = [];
+
 var request = 
 {
 	location: googleLatLong,
-	radius: '5000',
+	radius: '50000', //max range is 50000 (in meters)
 	types: ['restaurant']
 };
 
@@ -17,12 +19,19 @@ service.nearbySearch( request, callback );
 function callback( results, status ) 
 {
 	//console.log( results );
+
 	if ( status == google.maps.places.PlacesServiceStatus.OK )
 	{
 		for (var i = 0; i < results.length; i++) 
 		{
+			if( results[i].rating > 2.5 && results[i].price_level > 2 )
+			{
+				dateRestaurants.push( results[i] );
+			}
 			//console.log( results[i].name );
 		}
+
+		console.log( dateRestaurants );
 	}
 }
 
