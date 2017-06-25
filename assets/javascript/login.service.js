@@ -16,6 +16,9 @@ var loginService = ( function()
 	//current user
 	var currentUser;
 	var apiKeyZipCode = 'js-okLIlW7Iff1cWtt5AXRrTCDDv5LO0gspAe8VafEpvGBr94xK2pbV1PzwUklVBOkb';
+	
+	//register the "onUserCreated" which can be used by any other file
+	eventSystem.registerEvent( 'onUserCreated' );
 
 	//only the stuff that outside scripts can access
 	var publicAPI = 
@@ -106,6 +109,8 @@ var loginService = ( function()
     	{
 			user = new User( null, tPosition.lat, tPosition.lng, tPosition.zip_code );
     	}
+
+    	eventSystem.dispatchEvent( 'onUserCreated', user );
 
     	//returns the user at the global scope
 	    return user;

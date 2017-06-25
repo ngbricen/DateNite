@@ -31,9 +31,33 @@ function callback( results, status )
 			//console.log( results[i].name );
 		}
 
-		console.log( dateRestaurants );
+		//console.log( dateRestaurants );
 	}
 }
+
+//ZOMATO REQUEST OBJECT
+
+// $.ajax({
+//     url: "http://www.example.com/api",
+//     beforeSend: function(xhr) { 
+//       xhr.setRequestHeader("Authorization", "Basic " + btoa("username:password")); 
+//     },
+//     type: 'GET',
+//     dataType: 'json',
+//     contentType: 'application/json',
+//     data: '{"foo":"bar"}',
+//     success: function (data) {
+//       alert(JSON.stringify(data));
+//     },
+//     error: function(){
+//       alert("Cannot get data");
+//     }
+// });
+
+//ZOMATO API
+//0a382fade4b2a84645f407a1aba798fd
+//https://developers.zomato.com/api/v2.1/geocode?lat=33.744751&lon=-84.375485
+//curl -X GET --header "Accept: application/json" --header "user-key: 0a382fade4b2a84645f407a1aba798fd" "https://developers.zomato.com/api/v2.1/geocode?lat=33.744751&lon=-84.375485"
 
 //YELP API INFO
 //var yelpToken = "Bearer MFCkuq78C-cEfVRr6FNy3rn6fbzV98ThKWw2kz7QVGzakaN6vQWNyhKtBT0vD9edDTmu_W_zjeRggudF-LltV7vwfxppBVdrzvk9uBskssdh3eS8Avr6VI2odX1FWXYx"
