@@ -84,6 +84,7 @@ EventSystem.prototype.dispatchEvent = function( eventName, eventArgs )
 		//dispatch the event
 		this.events[eventName].callbacks.forEach( function( callback )
 		{
+			console.log( eventArgs );
 	    	callback( eventArgs );
 	  	});
 	}

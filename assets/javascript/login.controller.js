@@ -1,6 +1,7 @@
 var loginController = ( function()
 {
 	var controller = this;
+	var eatsView = $( '#eats-content' );
 
 	//=======================
 	//	Input
@@ -19,7 +20,8 @@ var loginController = ( function()
 	zipCodeInput.addEventListener( 'input', function(){ validateZipCode( zipCodeInput.value.trim() ) } );
 
 	//subscribe to the custom onUserCreated event
-	eventSystem.addEventListener( 'onUserCreated', function(){ restaurantService.googleSearchNearby( user ) } );
+	eventSystem.addEventListener( 'onUserCreated', restaurantService.googleSearchNearby );
+	eventSystem.addEventListener( 'onRestaurantsLoaded', displayRestaurants );
 
 	//VIA BUTTON
 	//using an anonymous function so that we can pass a parameter
@@ -53,6 +55,19 @@ var loginController = ( function()
 		//assuming we've made it this far - the zipcode should be a valid zipcode
 		//soget the zipcode from our service
 		loginService.getLocationByZip( tZipCode );
+	}
+
+	function displayRestaurants( tData )
+	{
+		console.log( eatsView );
+		for( var i = 0; i < tData.length; ++i )
+		{
+			var restaruantItem = $('<div>');
+
+			restaruantItem.html( tData[i].name + " rated: " + tData[i].rating );
+
+			eatsView.append( restaruantItem );
+		}
 	}
 
 	function userCreated( tUser )

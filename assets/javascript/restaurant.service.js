@@ -1,15 +1,13 @@
-//TEST DATA
-// var lat = 33.744751;
-// var long = -84.375485;
-// var googleLatLong = new google.maps.LatLng( lat, long );
-
-// var dateRestaurants = [];
-
-
+//=======================
+//	Restaurant Service
+//=======================
 var restaurantService = ( function()
 {
 	//create new service with a blank div (since we're not using a real map at this point)
 	var service = new google.maps.places.PlacesService( document.createElement('div') );
+
+	//register the "onRestaurantsLoaded" which can be used by any other file
+	eventSystem.registerEvent( 'onRestaurantsLoaded' );
 
 	//list of restuarants that meet the date criteria
 	var dateRestaurants = [];
@@ -25,7 +23,7 @@ var restaurantService = ( function()
 	return publicAPI;
 
 	//search based on current user
-	function googleSearchNearby( tUser )
+	function googleSearchNearby( tUser, tCallback )
 	{
 		if( tUser != null )
 		{
@@ -52,8 +50,8 @@ var restaurantService = ( function()
 
 	function googleSearchResults( tData, tStatus )
 	{
-		//console.log( tData );
-		//console.log( tStatus );
+		//console.log( 'tData = ' + tData );
+		//console.log( 'tStatus = ' + tStatus );
 
 		if ( tStatus == google.maps.places.PlacesServiceStatus.OK )
 		{
@@ -65,43 +63,12 @@ var restaurantService = ( function()
 				}
 			}
 
-			console.log( dateRestaurants );
+			eventSystem.dispatchEvent( 'onRestaurantsLoaded', dateRestaurants );
+			//return dateRestaurants;
 		}
 	}
 
 })();
-
-
-
-// var request = 
-// {
-// 	location: googleLatLong,
-// 	radius: '50000', //max range is 50000 (in meters)
-// 	types: ['restaurant']
-// };
-
-//var service = new google.maps.places.PlacesService( document.createElement('div') );
-//service.nearbySearch( request, callback );
-//service.nearbySearch( request, callback );
-
-// function callback( results, status ) 
-// {
-// 	//console.log( results );
-
-// 	if ( status == google.maps.places.PlacesServiceStatus.OK )
-// 	{
-// 		for (var i = 0; i < results.length; i++) 
-// 		{
-// 			if( results[i].rating > 2.5 && results[i].price_level > 1 )
-// 			{
-// 				dateRestaurants.push( results[i] );
-// 			}
-// 			//console.log( results[i].name );
-// 		}
-
-// 		console.log( dateRestaurants );
-// 	}
-// }
 
 //ZOMATO REQUEST OBJECT
 
