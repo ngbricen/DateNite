@@ -48,13 +48,22 @@ img{
     transform: translateY( 2px );
   }
 
+ 
 
+.panel {
+    overflow: auto;
+}
 
+.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+   background-color: khaki;
+}
 
+tr{
+	transition: .3s;
+}
 
-
-   /*.jumbotron {
-   	background-image: url("../images/admitone.jpg"); 
-   	background-repeat: no-repeat;
-   }*/
+tr.specificEvent:hover{
+	transform: scale(1.1);
+	cursor: pointer;
+}
 
