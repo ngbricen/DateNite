@@ -36,7 +36,7 @@ var loginController = ( function()
 		//check if the user is entering characters other than values
 		if( isNaN( tZipCode ) )
 		{
-			console.log( "only numbers are valid" );
+			//console.log( "only numbers are valid" );
 			//TODO: show warning below or above the zip field
 
 			//end the function here
@@ -46,8 +46,7 @@ var loginController = ( function()
 		//check if the zipcode is the required length
 		if( tZipCode.toString().length != 5 )
 		{
-			console.log( "not the right length" );
-
+			//console.log( "not the right length" );
 			//return the function here
 			return;
 		}
@@ -59,7 +58,7 @@ var loginController = ( function()
 
 	function displayRestaurants( tData )
 	{
-		console.log( eatsView );
+		//console.log( eatsView );
 		for( var i = 0; i < tData.length; ++i )
 		{
 			var restaruantItem = $('<div>');
@@ -68,10 +67,5 @@ var loginController = ( function()
 
 			eatsView.append( restaruantItem );
 		}
-	}
-
-	function userCreated( tUser )
-	{
-		console.log( tUser );
 	}
 })();
