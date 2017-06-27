@@ -2,49 +2,112 @@
 <html lang="en-us">
 <head>
   <meta charset="utf-8">
-	<title>Date Night</title>
+	<title>DateNite</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Leckerli+One" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="assets/css/date.css">
 </head>
 
 
-<body>
+<body style="background-image:url(assets/images/City-Background2.jpg); background-size: 100% 100%; background-repeat: no-repeat;">
+
+<!-- This landing page code
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Landing Page</title>
+  <link rel="stylesheet" type="text/css" href="assets/css/dummy-date.css">
+  <link href="https://fonts.googleapis.com/css?family=Leckerli+One" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+  
+</head>
+<body style="background-image:url(assets/images/City-Background2.jpg); background-size: 100%; background-repeat: no-repeat;">
+
+
 <div class="container">
+  <div class="header">
+      <h1 class="header-text">DateNite</h1>
+  </div>
+  <div class="description">
+      <h1>Plan an exciting nite for you and your Date!</h1>
+      <input class="zip-input" type="text" name="zip-code" placeholder="Enter Zip Code">
+  <div>    
+      <button class="submit">Submit</button>
+    </div>
+  </div>
+</div>    
+
+</body>
+</html>  
+
+
+CSS Code Begins Here
+
+.container {
+  margin-top: 210px;
+}
+
+.header {
+  text-align: center;
+  color: white;
+  margin: 0px;
  
-	<div class="jumbotron">
-	  	<div class="row">
-		  	<div class="col-md-9">
-		    	<h1>Git Out!</h1> 
-		   	</div>
-	   
-			<div class="col-md-3">
-				<div class="input-group">
-				  <input type="text" class="form-control" placeholder="Enter Name...">
-				      <span class="input-group-btn">
-				          <button class="btn btn-default" type="button">Enter</button>
-				      </span>
-					</div>
+}
+.description {
+  text-align: center;
+  color: white;
+  font-family: 'Roboto Condensed', sans-serif;
+  margin-top: 0px;
+}
 
-				<div class="input-group">
-			  		<input type="text" class="form-control" id="zip-code-input" placeholder="Enter Zip Code...">
-			  		<span class="input-group-btn">
-		      			<button class="btn btn-default" id="zip-code-button" type="button">Enter</button>
-			  		</span>
-				</div>
-				
-				<br/>
+.header-text {
+  font-size: 120px;
+  font-family: 'Leckerli One', cursive;
+  margin: 0px;
+}
+.zip-input {
+  height: 40px;
+  width: 400px;
+  margin-bottom: 7px;
+  text-align: center;
+  font-size: 17px;
+  border-radius: 10px;
+}
 
-				<button class="btn btn-primary btn-lg" id="login-button">Use Location</button>
-			</div>
-		</div>
+.submit {
+  background-color: rgb(216,45,45);
+  height: 40px;
+  width: 300px;
+  font-size: 15px;
+  border-radius: 10px;
+}
 
-    <p>Looking for fresh ideas of what to do...</p> 
 
-	</div>
+
+Landing Page Code Ends Here -->
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="header-bar">
+      <div class="col-xs-12 col-md-8 main-header">DateNite
+      </div>
+      <div class="col-xs-6 col-md-4">
+        <div class="input-group">
+          <input type="text" class="zipcode-input" placeholder="Enter Zip Code">
+          <span class="input-group-btn">
+            <button class="btn btn-default submit-button" type="button">Submit</button>
+          </span>
+        </div><!-- /input-group -->
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="container">
