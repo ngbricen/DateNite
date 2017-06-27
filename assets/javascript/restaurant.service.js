@@ -1,39 +1,74 @@
-//TEST DATA
-var lat = 33.744751;
-var long = -84.375485;
-var googleLatLong = new google.maps.LatLng( lat, long );
-
-var dateRestaurants = [];
-
-var request = 
+//=======================
+//	Restaurant Service
+//=======================
+var restaurantService = ( function()
 {
-	location: googleLatLong,
-	radius: '50000', //max range is 50000 (in meters)
-	types: ['restaurant']
-};
+	//create new service with a blank div (since we're not using a real map at this point)
+	var service = new google.maps.places.PlacesService( document.createElement('div') );
 
-service = new google.maps.places.PlacesService( document.createElement('div') );
-//service.nearbySearch( request, callback );
-service.nearbySearch( request, callback );
+	//register the "onRestaurantsLoaded" which can be used by any other file
+	eventSystem.registerEvent( 'onRestaurantsLoaded' );
 
-function callback( results, status ) 
-{
-	//console.log( results );
+	//list of restuarants that meet the date criteria
+	var dateRestaurants = [];
 
-	if ( status == google.maps.places.PlacesServiceStatus.OK )
+	//only the stuff that outside scripts can access
+	var publicAPI = 
 	{
-		for (var i = 0; i < results.length; i++) 
+		googleSearchNearby: googleSearchNearby,
+		dateRestaurants: dateRestaurants,
+	}
+
+	//return this api to the global scope
+	return publicAPI;
+
+	//search based on current user
+	function googleSearchNearby( tUser, tCallback )
+	{
+		if( tUser != null )
 		{
-			if( results[i].rating > 2.5 && results[i].price_level > 2 )
+			//create new google lat/long object using user data (required by google search api)
+			var googleLatLong = new google.maps.LatLng( tUser.latitude, tUser.longitude );
+			
+			//create object expected by the google search api
+			var googleRequest = 
 			{
-				dateRestaurants.push( results[i] );
+				location: googleLatLong,
+				radius: '10000', //max range is 50000 (in meters)
+				types: ['restaurant']				
 			}
-			//console.log( results[i].name );
+		}
+		else
+		{
+			console.log( "could not execute search as there is no user!" );
+			return;
 		}
 
-		//console.log( dateRestaurants );
+		//first param is the request, second is the results callback (executed on fail/success)
+		service.nearbySearch( googleRequest, googleSearchResults );
 	}
-}
+
+	function googleSearchResults( tData, tStatus )
+	{
+		//console.log( 'tData = ' + tData );
+		//console.log( 'tStatus = ' + tStatus );
+
+		if ( tStatus == google.maps.places.PlacesServiceStatus.OK )
+		{
+			for (var i = 0; i < tData.length; i++) 
+			{
+				if( tData[i].rating > 3 && tData[i].price_level > 1 )
+				{
+					dateRestaurants.push( tData[i] );
+				}
+			}
+
+			eventSystem.dispatchEvent( 'onRestaurantsLoaded', dateRestaurants );
+			//return dateRestaurants;
+		}
+	}
+
+})();
 
 //ZOMATO REQUEST OBJECT
 

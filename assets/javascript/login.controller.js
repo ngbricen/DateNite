@@ -1,6 +1,7 @@
 var loginController = ( function()
 {
 	var controller = this;
+	var eatsView = $( '#eats-content' );
 
 	//=======================
 	//	Input
@@ -19,7 +20,8 @@ var loginController = ( function()
 	zipCodeInput.addEventListener( 'input', function(){ validateZipCode( zipCodeInput.value.trim() ) } );
 
 	//subscribe to the custom onUserCreated event
-	eventSystem.addEventListener( 'onUserCreated', function(){ userCreated( user ) } );
+	eventSystem.addEventListener( 'onUserCreated', restaurantService.googleSearchNearby );
+	eventSystem.addEventListener( 'onRestaurantsLoaded', displayRestaurants );
 
 	//VIA BUTTON
 	//using an anonymous function so that we can pass a parameter
@@ -34,7 +36,7 @@ var loginController = ( function()
 		//check if the user is entering characters other than values
 		if( isNaN( tZipCode ) )
 		{
-			console.log( "only numbers are valid" );
+			//console.log( "only numbers are valid" );
 			//TODO: show warning below or above the zip field
 
 			//end the function here
@@ -44,8 +46,7 @@ var loginController = ( function()
 		//check if the zipcode is the required length
 		if( tZipCode.toString().length != 5 )
 		{
-			console.log( "not the right length" );
-
+			//console.log( "not the right length" );
 			//return the function here
 			return;
 		}
@@ -55,8 +56,16 @@ var loginController = ( function()
 		loginService.getLocationByZip( tZipCode );
 	}
 
-	function userCreated( tUser )
+	function displayRestaurants( tData )
 	{
-		console.log( tUser );
+		//console.log( eatsView );
+		for( var i = 0; i < tData.length; ++i )
+		{
+			var restaruantItem = $('<div>');
+
+			restaruantItem.html( tData[i].name + " rated: " + tData[i].rating );
+
+			eatsView.append( restaruantItem );
+		}
 	}
 })();
