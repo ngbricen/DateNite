@@ -1,0 +1,123 @@
+
+/*This is landing page CSS
+
+.container {
+  margin-top: 210px;
+}
+
+.header {
+  text-align: center;
+  color: white;
+  margin: 0px;
+ 
+
+}
+.description {
+  text-align: center;
+  color: white;
+  font-family: 'Roboto Condensed', sans-serif;
+  margin-top: 0px;
+}
+
+.header-text {
+  font-size: 120px;
+  font-family: 'Leckerli One', cursive;
+  margin: 0px;
+}
+.zip-input {
+  height: 40px;
+  width: 400px;
+  margin-bottom: 7px;
+  text-align: center;
+  font-size: 17px;
+  border-radius: 10px;
+}
+
+.submit {
+  background-color: rgb(216,45,45);
+  height: 40px;
+  width: 300px;
+  font-size: 15px;
+  border-radius: 10px;
+}*/
+
+
+
+
+img{
+	width: 100px;
+	height: 100px;
+}
+
+.events {
+    height: 400px;
+ 
+}
+ .panel-footer {
+   	height: 100px;
+}
+
+.header-bar {
+  height: 60px;
+  margin-bottom: 100px;
+
+}
+.main-header {
+  color: white;
+  font-size: 50px;
+  font-family: 'Leckerli One', cursive;
+}
+
+.zipcode-input {
+  width: 255px;
+  margin-top: 6px;
+  height: 37px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.submit-button {
+  margin-top: 5px;
+  border-top: 20px;
+  border-radius: 10px;
+  width: 100px;
+  transition: all .2s; 
+  height: 36px;
+  background-color: rgb(216,45,45);
+}
+
+  .submit-button:hover {
+    background-color: rgb(216,45,45);
+    color: white;
+  }
+
+  .submit-button:active {
+    transform: translateY( 2px );
+  }
+
+ 
+
+.panel {
+    overflow: auto;
+}
+
+.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+   background-color: khaki;
+}
+
+tr{
+	transition: .3s;
+}
+
+tr.specificEvent:hover{
+	transform: scale(1.1);
+	cursor: pointer;
+}
+
+.made-up-class-that-hopefully-doesnt-exist {
+  color: blue;
+  background-color: red;
+  border: 1px solid brown;
+  padding: 10px;
+}
+
