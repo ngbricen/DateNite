@@ -9,7 +9,7 @@ var eventBriteToken = "?token=56ZIJSBXO7WBDSTCMZE2&expand=venue"
 
 //TODO We need to got the zip Code value from $("#userName").val.trim()
 //TODO We also need to validate the zip Code to make sure tha it's a number without generating an alert/prompt
-var zipCode   = "&location.address=30309";
+var zipCode = "&location.address=30309";
 
 //TODO Ideally, we would like to also get the venue address, which is under the .venue node, but could not get it to work
 //TODO The call recommended by EventBrite is "&expand=category,venue"; however, that did not work...
@@ -33,6 +33,8 @@ var myEventName;
 var myEventURL;
 //Hide My Events since there are none
 $("#myEvents").hide();
+
+eventSystem.addEventListener( 'onUserCreated', searchEvents );
 
 //When user selects an event, need to add it to "My Events" section
 $(document).on("click",".specificEvent",function(){
@@ -79,10 +81,16 @@ $(document).on("click",".eventRemove",function(){
   return false;
 });
 
-//Call EventBrite and DisplayEvents
-queryURL = eventBriteQueryURL + eventBriteToken + zipCode + category;
-callEventBrite(queryURL);
+//Wrapper for user created event (to establish the new user location)
+function searchEvents( tUser )
+{
+  //override zipcode with the new one from the user
+  zipCode = '&location.address=' + tUser.zipCode;
+  queryURL = eventBriteQueryURL + eventBriteToken + zipCode + category;
+  callEventBrite( queryURL );
+}
 
+//Call EventBrite and DisplayEvents
 function callEventBrite(queryURL){
   //Initialize Events Header
   $("#events").text("Events Within " + EventsWithinDays + " days");
