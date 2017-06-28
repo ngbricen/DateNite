@@ -104,14 +104,14 @@ function callEventBrite(queryURL){
   }).done(function(response) {
     var results = response.events;
 
-    for (var i = 0; i < 40 ; i++) {
+    for (var i = 0; i < results.length; i++) {
 
-      if (results[i].logo.original !== null){
-        activityImage = results[i].logo.original.url;
-      }
-      else{
-        activityImage = "";
-      }
+        if (results[i].logo.original !== null){
+          activityImage = results[i].logo.original.url;
+        }
+        else{
+          activityImage = "";
+        }
       
       activityName= results[i].name.text;
       activityURL = results[i].url;
@@ -149,6 +149,9 @@ function callEventBrite(queryURL){
 }
 
 function addEventToControl(image,name,url,category,date,dayDiff){
+    
+    console.log( image );  
+
     var row = $("<tr>");
 
     //Adding Class to the row, which could be usd for an on click event
