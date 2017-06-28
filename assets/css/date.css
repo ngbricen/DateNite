@@ -1,4 +1,49 @@
 
+/*This is landing page CSS
+
+.container {
+  margin-top: 210px;
+}
+
+.header {
+  text-align: center;
+  color: white;
+  margin: 0px;
+ 
+
+}
+.description {
+  text-align: center;
+  color: white;
+  font-family: 'Roboto Condensed', sans-serif;
+  margin-top: 0px;
+}
+
+.header-text {
+  font-size: 120px;
+  font-family: 'Leckerli One', cursive;
+  margin: 0px;
+}
+.zip-input {
+  height: 40px;
+  width: 400px;
+  margin-bottom: 7px;
+  text-align: center;
+  font-size: 17px;
+  border-radius: 10px;
+}
+
+.submit {
+  background-color: rgb(216,45,45);
+  height: 40px;
+  width: 300px;
+  font-size: 15px;
+  border-radius: 10px;
+}*/
+
+
+
+
 img{
 	width: 100px;
 	height: 100px;
@@ -12,8 +57,10 @@ img{
    	height: 100px;
 }
 
-.container {
-  height: 200px;
+.header-bar {
+  height: 60px;
+  margin-bottom: 100px;
+
 }
 .main-header {
   color: white;
@@ -30,11 +77,11 @@ img{
 }
 
 .submit-button {
-  border-radius: 10px;
+  margin-top: 5px;
   border-top: 20px;
+  border-radius: 10px;
   width: 100px;
   transition: all .2s; 
-  margin-top: 5px;
   height: 36px;
   background-color: rgb(216,45,45);
 }
