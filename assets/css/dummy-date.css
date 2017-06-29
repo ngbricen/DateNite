@@ -1,0 +1,59 @@
+.container {
+	margin-top: 210px;
+}
+
+.header {
+  text-align: center;
+  color: white;
+  margin: 0px;
+ 
+}
+.description {
+  text-align: center;
+  color: white;
+  font-family: 'Roboto Condensed', sans-serif;
+  margin-top: 0px;
+}
+
+.header-text {
+	font-size: 120px;
+	font-family: 'Leckerli One', cursive;
+	margin: 0px;
+}
+.zip-input {
+	height: 40px;
+	width: 400px;
+	margin-bottom: 7px;
+	text-align: center;
+	font-size: 17px;
+	border-radius: 10px;
+}
+
+.submit {
+	background-color: rgb(216,45,45);
+	height: 40px;
+	width: 300px;
+	font-size: 15px;
+	border-radius: 10px;
+}
+
+.hidden {
+	opacity: 0;
+	transition: all 1s;
+}
+
+.visible {
+	opacity: 1;
+}
+
+#landing-page {
+	z-index: 999;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	background-image:url(../images/City-Background2.jpg);
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
