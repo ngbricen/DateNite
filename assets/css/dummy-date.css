@@ -1,4 +1,4 @@
-.container {
+.landing{
 	margin-top: 210px;
 }
 
@@ -48,12 +48,15 @@
 
 #landing-page {
 	z-index: 999;
-	position: absolute;
+}
+
+#main-page, #landing-page {
+	background-image:url(../images/City-Background2.jpg);
+	background-size: 100%;
+	background-repeat: no-repeat;
+	position: fixed;
 	top: 0px;
 	left: 0px;
 	right: 0px;
 	bottom: 0px;
-	background-image:url(../images/City-Background2.jpg);
-	background-size: 100%;
-	background-repeat: no-repeat;
 }
