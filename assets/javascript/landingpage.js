@@ -6,8 +6,6 @@ $(document).ready(function(){
         $('#landing-button').click(function() {
             var landingPage = $("#landing-page");
 
-            console.log("hello");
-
             if (landingPage.hasClass("hidden")) {
                 landingPage.removeClass("date-hidden").addClass("visible");
 

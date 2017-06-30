@@ -37,6 +37,8 @@
 </div>
 
 <div id="main-page">
+  
+  <!-- Top Section of Page Start -->
   <div class="container">
     <div class="row">
       <div class="header-bar">
@@ -53,8 +55,9 @@
         </div>
       </div>
     </div>
-  	
-  <div class="container">
+  	<!-- Top Section of Page End -->
+
+    <!-- My Events Section when selecting Google Place or EventBrite Event Start -->
     <div class="row">
       <div class="col-lg-12">
         <div class="panel-group" id = "myEvents">
@@ -78,35 +81,42 @@
         </div>
       </div>
     </div>
+    <!-- My Events Section when selecting Google Place or EventBrite Event End -->
+
+    <!-- EventBrite and Google Place Section Start -->
   	<div class="row">
       <div class="col-lg-6">
         <div class="dropdown">
+          <!-- EventBrite Category Selection Start -->
           <button class="btn btn-primary dropdown-toggle" type="button" id="categories" category-id="0" data-toggle="dropdown">Categories
-            <span class="caret"></span></button>
-            <ul class="dropdown-menu">
-             <!-- Note that the Category-id below is the actual ID from Event Brite which was retrieved by-->
-             <!--  running https://www.eventbriteapi.com/v3/categories/:id/?token=56ZIJSBXO7WBDSTCMZE2 -->
-              <li><a href="#" class="categories" category-id="0">None</a></li>
-              <li><a href="#" class="categories" category-id="103">Music</a></li>
-              <li><a href="#" class="categories" category-id="110">Food & Drink</a></li>
-              <li><a href="#" class="categories" category-id="104">Film & Media </a></li>
-              <li><a href="#" class="categories" category-id="105">Arts</a></li>
-              <li><a href="#" class="categories" category-id="102">Science & Tech</a></li>
-              <li><a href="#" class="categories" category-id="119">Hobbies</a></li>
-              <li><a href="#" class="categories" category-id="109">Travel & Outdoor</a></li>
-              <li><a href="#" class="categories" category-id="118">Auto, Boat & Air</a></li>
-            </ul>
-            <!-- Days Options Start -->
-            <label class="radio-inline"><input type="radio" class="dayrange" name="dayradio" day-id="0">Today</label>
-            <label class="radio-inline"><input type="radio" class="dayrange" name="dayradio" day-id="1">Within 1 Night</label>
-            <label class="radio-inline"><input type="radio" class="dayrange" name="dayradio" day-id="3">3 Nights</label>
-            <label class="radio-inline"><input type="radio" class="dayrange" checked="true" name="dayradio" day-id="5">5 Nights</label>
-            <!-- Days Options End -->
+          <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+           <!-- Note that the Category-id below is the actual ID from Event Brite which was retrieved by-->
+           <!--  running https://www.eventbriteapi.com/v3/categories/:id/?token=56ZIJSBXO7WBDSTCMZE2 -->
+            <li><a href="#" class="categories" category-id="0">None</a></li>
+            <li><a href="#" class="categories" category-id="103">Music</a></li>
+            <li><a href="#" class="categories" category-id="110">Food & Drink</a></li>
+            <li><a href="#" class="categories" category-id="104">Film & Media </a></li>
+            <li><a href="#" class="categories" category-id="105">Arts</a></li>
+            <li><a href="#" class="categories" category-id="102">Science & Tech</a></li>
+            <li><a href="#" class="categories" category-id="119">Hobbies</a></li>
+            <li><a href="#" class="categories" category-id="109">Travel & Outdoor</a></li>
+            <li><a href="#" class="categories" category-id="118">Auto, Boat & Air</a></li>
+          </ul>
+         <!-- EventBrite Category Selection End --> 
+          <!-- Days Options Start -->
+          <label class="radio-inline"><input type="radio" class="dayrange" name="dayradio" day-id="0">Today</label>
+          <label class="radio-inline"><input type="radio" class="dayrange" name="dayradio" day-id="1">Within 1 Night</label>
+          <label class="radio-inline"><input type="radio" class="dayrange" name="dayradio" day-id="5">5 Nights</label>
+          <label class="radio-inline"><input type="radio" class="dayrange" checked="true" name="dayradio" day-id="10">10 Nights</label>
+          <!-- Days Options End -->
         </div>
       </div>
     </div>
     <br>
+    
     <div class="row">
+      <!-- EventBrite Start -->
       <div class="col-lg-6">
           <div class="panel panel-default events" id="movies">
             <div class="panel-heading" id="events">Events</div>
@@ -127,6 +137,8 @@
             </div>                
           </div>
       </div>
+      <!-- EventBrite End -->
+      <!-- Google Place Start -->
       <div class="col-lg-6">
           <div class="panel panel-default events" id="eats">
           	<div class="panel-heading">Eats</div>
@@ -135,9 +147,10 @@
           	</div>
           </div>
       </div>
+      <!-- Google Place End -->
     </div>
-  </div>
 </div>
+<!-- EventBrite and Google Place Section End -->
 
 <!-- EVENTS -->
 <script src="assets/javascript/event.service.js"></script>
