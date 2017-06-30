@@ -5,17 +5,14 @@ var yelpQueryURL = "https://api.yelp.com/v3/businesses/search?location=" ;
 //Defining Variables to call the Event Brite API
 var queryURL = "";
 var eventBriteQueryURL = "https://www.eventbriteapi.com/v3/events/search/"
-var eventBriteToken = "?token=56ZIJSBXO7WBDSTCMZE2&expand=venue"
-
-//TODO We need to got the zip Code value from $("#userName").val.trim()
-//TODO We also need to validate the zip Code to make sure tha it's a number without generating an alert/prompt
-var zipCode = "&location.address=30309";
+var eventBriteToken = "?token=56ZIJSBXO7WBDSTCMZE2"
 
 //TODO Ideally, we would like to also get the venue address, which is under the .venue node, but could not get it to work
 //TODO The call recommended by EventBrite is "&expand=category,venue"; however, that did not work...
 var category  = "&expand=category";
 
 // variables for both events and restaurants are the same
+var activityId;
 var activityImage;
 var activityName;
 var activityURL;
@@ -24,13 +21,14 @@ var activityDate;
 var activityHour;
 var activityMeridiem;
 var activityDateFormatted;
-var EventsWithinDays = 5;
+var EventsWithinDays = 10;
 var dayDiff;
 var selection; 
 var eventCount = 0;
 var myEventDate;
 var myEventName;
 var myEventURL;
+
 //Hide My Events since there are none
 $("#myEvents").hide();
 
@@ -62,8 +60,8 @@ $(document).on("click",".specificEvent",function(){
 
   row.append($("<td class = 'myDetails'>" + "<strong>" + myEventDate + " - </strong>" 
                       + "<a href='" + myEventURL + "' target='_blank'>" 
-                      + myEventName + "</a>")); 
-  row.append($("<td class ='eventRemove'> <a href='#'><span class='glyphicon glyphicon-remove-sign'></span></a>"));
+                      + myEventName + "</a></td>")); 
+  row.append($("<td class ='eventRemove'> <a href='#'><span class='glyphicon glyphicon-remove-sign'></span></a></td>"));
 
   $("#myEvent-table tbody").append(row);
 
@@ -78,6 +76,14 @@ $(document).on("click",".eventRemove",function(){
   eventCount--;
   $("#myEventHeader").text("My Events (" + eventCount + ")");
   
+  //Hide the events section if there are none
+  if (eventCount === 0){
+
+    //Hide My Events since there are none and collapse in
+    $("#myEvents").hide();
+    // $(".collapse").collapse();
+  }
+
   return false;
 });
 
@@ -94,9 +100,14 @@ function searchEvents( tUser )
 function callEventBrite(queryURL){
   //Initialize Events Header
   $("#events").text("Events Within " + EventsWithinDays + " days");
+
+
+  //Remove formatting from table
+  $("#event-table").dataTable().fnDestroy();
   
   //Empty table
   $("#event-table tbody").empty();
+
 
   $.ajax({
     url: queryURL,
@@ -104,14 +115,20 @@ function callEventBrite(queryURL){
   }).done(function(response) {
     var results = response.events;
 
+    console.log(queryURL);
+    console.log(results);
+    
     for (var i = 0; i < results.length; i++) {
 
-        if (results[i].logo.original !== null){
-          activityImage = results[i].logo.original.url;
-        }
-        else{
-          activityImage = "";
-        }
+      activityId = results[i].id;
+
+      //Get Image or replace with Generic if image does not exist
+      if (results[i].logo !== null){
+        activityImage = results[i].logo.original.url;
+      }
+      else{
+        activityImage = "./assets/images/noimage.jpg";
+      }
       
       activityName= results[i].name.text;
       activityURL = results[i].url;
@@ -126,31 +143,34 @@ function callEventBrite(queryURL){
       // To calculate the days difference and keep the positive value
       dayDiff = Math.abs(moment(activityDate).diff(moment(), "days"));
 
+      //In a case where the activity is 9/29 5PM and current time is 9/28 10PM
+      //The diff function above will return 0 as if it's on the same day - this is resolved below
+      if (dayDiff === 0 && moment(activityDate).format("MM/DD/YY") !== moment().format("MM/DD/YY")){
+        dayDiff = 1;
+      }
+
       activityDateFormatted =  moment(activityDate).format("MM/DD/YY h:mmA");
       activityHour =  moment(activityDate).format("h");
       activityMeridiem =  moment(activityDate).format("A");
 
       //Function to build the event html elements and add it to the event DIV control
       //Only if the event occurrs on the current day and occurs in the evening
-      if (dayDiff <=EventsWithinDays && activityHour >= 6 && activityMeridiem === "PM"){
-        addEventToControl(activityImage,activityName,activityURL,activityCategory,activityDateFormatted,dayDiff);
-      }
+     if (dayDiff <=EventsWithinDays && activityHour >= 5 && activityMeridiem === "PM"){
+        addEventToControl(activityImage,activityName,activityURL,activityCategory,activityDateFormatted,activityId);
+     }
     }
 
-    //Include Pagination Features
+    // //Include Pagination Features
     $("#event-table").DataTable({
         "lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
-         "bDestroy": true
+        "bRetrieve": true
     });
-
 
   });
 
 }
 
-function addEventToControl(image,name,url,category,date,dayDiff){
-    
-    console.log( image );  
+function addEventToControl(image,name,url,category,date,eventId){
 
     var row = $("<tr>");
 
@@ -168,19 +188,21 @@ function addEventToControl(image,name,url,category,date,dayDiff){
 
     //Adding row to the table
     row.append($("<td class ='image'>" + "<img src='" + image +"' class='image'>" + "</td>"));
-    row.append($("<td class = 'details'>" + "<strong>" + date + "</strong>" 
-                        + "<p><a href='" + url + "' target='_blank'></p>" 
-                         + name + "</a>" 
-                        + "<strong> - " + category + "</strong>")); 
+    row.append($("<td class = 'details' event-id =" + eventId + ">" 
+                      + "<strong>" + date + "</strong>" 
+                      + "<p><a href='" + url + "' target='_blank'></p>" 
+                      + name + "</a>" 
+                      + "<strong> - " + category + "</strong></td>")); 
                         // + "<p><strong>In " + dayDiff + " days</strong></td>"));
     $("#event-table tbody").append(row);
 }  
 
 //Actions when users enters a message
 $(".categories").on("click",function(event){
-  
   //Get the selection from the dropdown
   selection = $(this).attr("category-id");
+
+  zipCode = '&location.address=' + $("#zip-code-input").val().trim();
 
   //Replace the dropdownheader text and attribute
   $("#categories").text($(this).text());
@@ -209,7 +231,9 @@ $(".dayrange").on("click",function(event){
 
   //Get the selection from the dropdown
   selection =  $("#categories").attr("category-id");
-  
+
+  zipCode = '&location.address=' + $("#zip-code-input").val().trim();
+
   //If the Selection is none
   if (selection === "0"){
      queryURL = eventBriteQueryURL + eventBriteToken + zipCode + category;
