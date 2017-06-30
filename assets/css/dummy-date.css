@@ -1,4 +1,4 @@
-.container {
+.landing{
 	margin-top: 210px;
 }
 
@@ -27,6 +27,7 @@
 	text-align: center;
 	font-size: 17px;
 	border-radius: 10px;
+	color: black;
 }
 
 .submit {
@@ -37,23 +38,27 @@
 	border-radius: 10px;
 }
 
-.hidden {
+.date-hidden {
 	opacity: 0;
 	transition: all 1s;
 }
 
 .visible {
 	opacity: 1;
+	transition: all 1s;
 }
 
 #landing-page {
 	z-index: 999;
-	position: absolute;
+}
+
+#main-page, #landing-page {
+	background-image:url(../images/City-Background2.jpg);
+	background-size: 100%;
+	background-repeat: no-repeat;
+	position: fixed;
 	top: 0px;
 	left: 0px;
 	right: 0px;
 	bottom: 0px;
-	background-image:url(../images/City-Background2.jpg);
-	background-size: 100%;
-	background-repeat: no-repeat;
 }
