@@ -27,6 +27,7 @@
 	text-align: center;
 	font-size: 17px;
 	border-radius: 10px;
+	color: black;
 }
 
 .submit {
@@ -37,13 +38,14 @@
 	border-radius: 10px;
 }
 
-.hidden {
+.date-hidden {
 	opacity: 0;
 	transition: all 1s;
 }
 
 .visible {
 	opacity: 1;
+	transition: all 1s;
 }
 
 #landing-page {

@@ -106,7 +106,7 @@ img{
 }
 
 tr{
-	transition: .3s;
+	/*transition: .3s;*/
 }
 
 tr.specificEvent:hover{

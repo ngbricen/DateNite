@@ -9,10 +9,13 @@ $(document).ready(function(){
             console.log("hello");
 
             if (landingPage.hasClass("hidden")) {
-                landingPage.removeClass("hidden").addClass("visible");
+                landingPage.removeClass("date-hidden").addClass("visible");
 
             } else {
-                landingPage.removeClass("visible").addClass("hidden");
+                landingPage.removeClass("visible").addClass("date-hidden");
+                setTimeout(function(){
+                	landingPage.css("display","none")
+                },1000);
             }
         });
     });
