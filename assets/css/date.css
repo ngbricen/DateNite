@@ -50,21 +50,37 @@ img{
 }
 
 .events {
-    height: 400px;
+    height: 400px;   
  
 }
+
+
+#events {
+  background-color: #404040;
+  color: white;
+}
+
+#eats-header {
+  background-color: #404040;
+  color: white;
+}
+
  .panel-footer {
    	height: 100px;
 }
 
+
+
 .header-bar {
   height: 60px;
-  margin-bottom: 100px;
+  margin-bottom: 30px;
+  background-color: #404040;
+  
 
 }
 .main-header {
   color: white;
-  font-size: 50px;
+  font-size: 40px;
   font-family: 'Leckerli One', cursive;
 }
 
@@ -101,8 +117,14 @@ img{
     overflow: auto;
 }
 
+
 .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
    background-color: khaki;
+}
+
+.dropdown {
+  background-color: #404040;
+  color: white;
 }
 
 tr{
