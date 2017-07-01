@@ -55,12 +55,7 @@ img{
 }
 
 
-#events {
-  background-color: #404040;
-  color: white;
-}
-
-#eats-header {
+#myEventsHeader, #events, #eats-header, .dropdown  {
   background-color: #404040;
   color: white;
 }
@@ -122,11 +117,6 @@ img{
    background-color: khaki;
 }
 
-.dropdown {
-  background-color: #404040;
-  color: white;
-}
-
 tr{
 	/*transition: .3s;*/
 }
@@ -141,5 +131,17 @@ tr.specificEvent:hover{
   background-color: red;
   border: 1px solid brown;
   padding: 10px;
+}
+
+#zip-code-splashmessage, #zip-code-landingmessage{
+  color:red;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+#zip-code-landingmessage{
+  float: right;
+  margin-top: 15px;
+  font-family: 'Roboto Condensed', sans-serif;
 }
 

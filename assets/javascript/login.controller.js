@@ -11,6 +11,8 @@ var loginController = ( function()
 	var zipCodeButton = document.getElementById( 'zip-code-button' );
 	var zipCodeInput = document.getElementById( 'zip-code-input' );
 	var zipCodeSplashInput = document.getElementById( 'zip-code' );
+	var zipCodeSplashMessage = document.getElementById( 'zip-code-splashmessage' );
+	var zipCodeLandingMessage = document.getElementById( 'zip-code-landingmessage' );
 	var zipCodeSplashButton = document.getElementById( 'landing-button' );
 
 	//=======================
@@ -37,27 +39,52 @@ var loginController = ( function()
 	//for making sure the zipcode entered is valid before we pass to our API
 	function validateZipCode( tZipCode )
 	{
+		//Start With blank message
+		zipCodeSplashMessage.innerHTML = "";
+		zipCodeLandingMessage.innerHTML = "";
+
 		//check if the user is entering characters other than values
 		if( isNaN( tZipCode ) )
 		{
 			//console.log( "only numbers are valid" );
-			//TODO: show warning below or above the zip field
+			//Splash Div  - still OK since this will be hidden when going to Main Div
+			zipCodeSplashMessage.style.display = '';
+			zipCodeSplashMessage.innerHTML = "<strong>Only numbers are valid</strong>";
+			zipCodeSplashButton.style.display = 'none';
+
+			//Main Div
+			zipCodeLandingMessage.style.display = '';
+			zipCodeLandingMessage.innerHTML = "<strong>Only numbers are valid</strong>";
+			zipCodeButton.style.display = 'none';
 
 			//end the function here
 			return;
 		}
 
 		//check if the zipcode is the required length
-		if( tZipCode.toString().length != 5 )
+		if( tZipCode.toString().length !== 5 )
 		{
 			//console.log( "not the right length" );
-			//return the function here
+			if(tZipCode.toString().length > 5){
+
+				//Splash Div  - still OK since this will be hidden when going to Main Div
+				zipCodeSplashMessage.style.display = '';
+				zipCodeSplashMessage.innerHTML = "<strong>Not the right length - Enter Only 5 Digits</strong>";
+				zipCodeSplashButton.style.display = 'none';
+
+				//Main Div
+				zipCodeLandingMessage.style.display = '';
+				zipCodeLandingMessage.innerHTML = "<strong>Not the right length - Enter Only 5 Digits</strong>";
+				zipCodeButton.style.display = 'none';
+			}
+
 			return;
 		}
 
 		//assuming we've made it this far - the zipcode should be a valid zipcode
 		//soget the zipcode from our service and show the Splash button submit button
 		zipCodeSplashButton.style.display = '';
+		zipCodeButton.style.display = '';
 		loginService.getLocationByZip( tZipCode );
 	}
 
