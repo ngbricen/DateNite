@@ -2,6 +2,7 @@ var loginController = ( function()
 {
 	var controller = this;
 	var eatsView = $( '#eats-content' );
+	var landingPage =  document.getElementById('landing-page');
 
 	//=======================
 	//	Input
@@ -9,6 +10,8 @@ var loginController = ( function()
 	var locationButton = document.getElementById( 'login-button' );
 	var zipCodeButton = document.getElementById( 'zip-code-button' );
 	var zipCodeInput = document.getElementById( 'zip-code-input' );
+	var zipCodeSplashInput = document.getElementById( 'zip-code' );
+	var zipCodeSplashButton = document.getElementById( 'landing-button' );
 
 	//=======================
 	//	Events
@@ -18,6 +21,7 @@ var loginController = ( function()
 
 	//when the input field changes, check if it's valid input( using an anonymous function so that we can pass parameters )
 	zipCodeInput.addEventListener( 'input', function(){ validateZipCode( zipCodeInput.value.trim() ) } );
+	zipCodeSplashInput.addEventListener( 'input', function(){ validateZipCode( zipCodeSplashInput.value.trim() ) } );
 
 	//subscribe to the custom onUserCreated event
 	eventSystem.addEventListener( 'onUserCreated', restaurantService.googleSearchNearby );
@@ -52,7 +56,8 @@ var loginController = ( function()
 		}
 
 		//assuming we've made it this far - the zipcode should be a valid zipcode
-		//soget the zipcode from our service
+		//soget the zipcode from our service and show the Splash button submit button
+		zipCodeSplashButton.style.display = '';
 		loginService.getLocationByZip( tZipCode );
 	}
 
@@ -61,11 +66,11 @@ var loginController = ( function()
 		//console.log( eatsView );
 		for( var i = 0; i < tData.length; ++i )
 		{
-			var restaruantItem = $('<div>');
+			var restaurantItem = $('<div>');
 
-			restaruantItem.html( tData[i].name + " rated: " + tData[i].rating );
+			restaurantItem.html( tData[i].name + " rated: " + tData[i].rating );
 
-			eatsView.append( restaruantItem );
+			eatsView.append( restaurantItem );
 		}
 	}
 })();

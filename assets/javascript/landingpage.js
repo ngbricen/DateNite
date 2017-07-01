@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
-
-        // $('#landing-page').addClass("hidden");
+        //Start by hiding the Submit button
+        $('#landing-button').hide();
 
         $('#landing-button').click(function() {
             var landingPage = $("#landing-page");
@@ -14,6 +14,7 @@ $(document).ready(function(){
                 setTimeout(function(){
                 	landingPage.css("display","none")
                 },1000);
+                $("#zip-code-input").val($("#zip-code").val());
             }
         });
     });
