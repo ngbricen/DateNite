@@ -15,7 +15,7 @@ var loginService = ( function()
 {
 	//current user
 	var currentUser;
-	var apiKeyZipCode = 'sQ8TmdgmloK621rldEfKmRs6UEf6vc5Y3eSpr8MMwwTzxlUL09wn1YtVCI28V76Y';
+	var apiKeyZipCode = 'js-okLIlW7Iff1cWtt5AXRrTCDDv5LO0gspAe8VafEpvGBr94xK2pbV1PzwUklVBOkb';
 	
 	//register the "onUserCreated" which can be used by any other file
 	eventSystem.registerEvent( 'onUserCreated' );
