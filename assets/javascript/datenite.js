@@ -192,7 +192,7 @@ function addEventToControl(image,name,url,category,date,eventId){
                       + "<strong>" + date + "</strong>" 
                       + "<p><a href='" + url + "' target='_blank'></p>" 
                       + name + "</a>" 
-                      + "<strong> - " + category + "</strong></td>")); 
+                      + "<p><strong>" + category + "</strong></p></td>")); 
                         // + "<p><strong>In " + dayDiff + " days</strong></td>"));
     $("#event-table tbody").append(row);
 }  
@@ -214,11 +214,11 @@ $(".categories").on("click",function(event){
   //If the Selection is none
   if (selection === "0"){
      queryURL = eventBriteQueryURL + eventBriteToken + zipCode + category;
-     $("#events").text("Events Within " + EventsWithinDays + " days");
+     $("#events").html("<strong>Events Within " + EventsWithinDays + " days</strong>");
   }
   else {
     queryURL = eventBriteQueryURL + eventBriteToken + zipCode + category + "&categories=" + selection;
-    $("#events").html("Events Within " + EventsWithinDays + " days<strong> - Filtered by " + $(this).text() + "</strong>");
+    $("#events").html("<strong>Events Within " + EventsWithinDays + " days - Filtered by " + $(this).text() + "</strong>");
   }
   
   callEventBrite(queryURL);
@@ -237,11 +237,11 @@ $(".dayrange").on("click",function(event){
   //If the Selection is none
   if (selection === "0"){
      queryURL = eventBriteQueryURL + eventBriteToken + zipCode + category;
-     $("#events").text("Events Within " + EventsWithinDays + " days");
+     $("#events").html("<strong>Events Within " + EventsWithinDays + " days</strong>");
   }
   else {
     queryURL = eventBriteQueryURL + eventBriteToken + zipCode + category + "&categories=" + selection;
-    $("#events").html("Events Within " + EventsWithinDays + " days<strong> - Filtered by " + $(this).text() + "</strong>");
+    $("#events").html("<strong>Events Within " + EventsWithinDays + " days - Filtered by " + $(this).text() + "</strong>");
   }
   
   callEventBrite(queryURL);

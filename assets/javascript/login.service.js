@@ -61,6 +61,9 @@ var loginService = ( function()
 	//prompt the user for location data
 	function getLocation() 
 	{
+		//Remove the zip code from the top right to avoid a search via that zip code
+		$("#zip-code-input").val("");
+
 	    if( navigator.geolocation ) 
 	    {
 	        //first arg is success callback, second arg is failure callback

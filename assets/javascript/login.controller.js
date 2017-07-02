@@ -90,14 +90,45 @@ var loginController = ( function()
 
 	function displayRestaurants( tData )
 	{
+		//Remove formatting from table
+		$("#eats-table").dataTable().fnDestroy();
+		  
+		//Empty table
+		$("#eats-table tbody").empty();
+
 		//console.log( eatsView );
 		for( var i = 0; i < tData.length; ++i )
 		{
-			var restaurantItem = $('<div>');
+			var row = $("<tr>");
 
-			restaurantItem.html( tData[i].name + " rated: " + tData[i].rating );
+		    //Adding Class to the row, which could be usd for an on click event
+		    row.addClass("specificEvent");
 
-			eatsView.append( restaurantItem );
+		    // Creating and storing an image tag
+		    var eventImage = $("<img>");
+
+		    // Setting the src attribute of the image to a property pulled off the result item
+		    eventImage.attr("src", "./assets/images/restaurant.jpg");
+
+		    //Setting all other images variables
+		    eventImage.addClass("image");
+
+		    //Adding row to the table
+		    row.append($("<td class ='image'>" + "<img src='./assets/images/restaurant.jpg' class='image'>" + "</td>"));
+		    row.append($("<td class = 'details' event-id =" + tData[i].place_id + ">" 
+		                      + "<strong>Rating " + tData[i].rating + "</strong>" 
+		                      + "<p><a href='" + tData[i].website + "' target='_blank'></p>" 
+		                      + tData[i].name + "</a>" 
+		                      + "<p>" + tData[i].formatted_address
+		                      + " - " + tData[i].formatted_phone_number + "</p></td>")); 
+
+		    $("#eats-table tbody").append(row);
 		}
+
+		//Include Pagination Features
+	    $("#eats-table").DataTable({
+	        "lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
+	        "bRetrieve": true
+	    });
 	}
 })();
