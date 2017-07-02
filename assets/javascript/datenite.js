@@ -166,6 +166,9 @@ function callEventBrite(queryURL){
         "bRetrieve": true
     });
 
+    //event to inform that the events have been loaded
+    eventSystem.dispatchEvent( 'onEventsLoaded' );
+
   });
 
 }
