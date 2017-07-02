@@ -56,7 +56,7 @@
             <span class="input-group-btn">
               <button class="btn btn-default submit-button" type="button" id="zip-code-button">Submit</button>
             </span>
-            <button class="btn btn-danger" id="login-button">use location</button>
+            <button class="btn btn-danger submit-button" id="login-button">use location</button>
           </div><!-- /input-group -->
         </div>
       </div>
@@ -149,7 +149,20 @@
           <div class="panel panel-default events" id="eats">
           	<div class="panel-heading" id="eats-header"><strong>Eats</strong></div>
           	<div class="panel-body">
-          		<div id="eats-content"></div>
+          		<div class="table-responsive">
+                <table class="table table-hover table-striped" id="eats-table" data-toggle="table">
+                  <thead>
+                      <tr>
+                          <th>Pics</th>
+                          <th>Details</th>
+                      </tr>
+                  </thead>
+                  
+                  <tbody >           
+                  </tbody>
+                </table>
+              </div>
+            </div>    
           	</div>
           </div>
       </div>
