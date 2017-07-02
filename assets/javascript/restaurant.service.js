@@ -55,12 +55,22 @@ var restaurantService = ( function()
 
 		if ( tStatus == google.maps.places.PlacesServiceStatus.OK )
 		{
+			console.log("Get Google place Results");
+			console.log(tData);
+
 			for (var i = 0; i < tData.length; i++) 
 			{
+				//Only Reated 3 or Higher
 				if( tData[i].rating > 3 && tData[i].price_level > 1 )
 				{
-					dateRestaurants.push( tData[i] );
-				}
+					service.getDetails({
+			          placeId: tData[i].place_id
+			        }, function(place, status) {
+			          	if (status === google.maps.places.PlacesServiceStatus.OK) {
+								dateRestaurants.push( place );
+			          	}
+			        });
+			    }
 			}
 
 			eventSystem.dispatchEvent( 'onRestaurantsLoaded', dateRestaurants );

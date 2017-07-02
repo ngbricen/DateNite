@@ -81,14 +81,14 @@ img{
 
 .zipcode-input {
   width: 255px;
-  margin-top: 6px;
+  margin: 10px 10px;
   height: 37px;
   border-radius: 10px;
   text-align: center;
 }
 
 .submit-button {
-  margin-top: 5px;
+  margin: 10px 10px;
   border-top: 20px;
   border-radius: 10px;
   width: 100px;
