@@ -1,13 +1,18 @@
 var loginController = ( function()
 {
 	var controller = this;
+	var isEventsLoaded = false;
+	var isRestaurantsLoaded = false;
+
 	var eatsView = $( '#eats-content' );
-	var landingPage =  document.getElementById('landing-page');
+	var landingPage =  document.getElementById( 'landing-page' );
+	var loadingPage = document.getElementById( 'loading-page' );
 
 	//=======================
 	//	Input
 	//=======================
 	var locationButton = document.getElementById( 'login-button' );
+	var locationLandingButton = document.getElementById( 'location-landing-button' );
 	var zipCodeButton = document.getElementById( 'zip-code-button' );
 	var zipCodeInput = document.getElementById( 'zip-code-input' );
 	var zipCodeSplashInput = document.getElementById( 'zip-code' );
@@ -19,16 +24,21 @@ var loginController = ( function()
 	//	Events
 	//=======================
 	//for "location button" - fire get location service
-	locationButton.addEventListener( 'click', loginService.getLocation );
+	locationButton.addEventListener( 'click', startLoadData );
+	locationLandingButton.addEventListener( 'click', startLoadData );
 
 	//when the input field changes, check if it's valid input( using an anonymous function so that we can pass parameters )
 	zipCodeInput.addEventListener( 'input', function(){ validateZipCode( zipCodeInput.value.trim() ) } );
 	zipCodeSplashInput.addEventListener( 'input', function(){ validateZipCode( zipCodeSplashInput.value.trim() ) } );
-
+	
+	//create events
+	eventSystem.registerEvent( 'onEventsLoaded' );
+	
 	//subscribe to the custom onUserCreated event
 	eventSystem.addEventListener( 'onUserCreated', restaurantService.googleSearchNearby );
 	eventSystem.addEventListener( 'onRestaurantsLoaded', displayRestaurants );
-
+	eventSystem.addEventListener( 'onEventsLoaded', displayEvents ); 
+	
 	//VIA BUTTON
 	//using an anonymous function so that we can pass a parameter
 	//zipCodeButton.addEventListener( 'click', function(){ loginService.getLocationByZip( zipCodeInput.value.trim() ) } );
@@ -88,6 +98,20 @@ var loginController = ( function()
 		loginService.getLocationByZip( tZipCode );
 	}
 
+	//when you actually press the button
+	function loginZipCode( tZipCode )
+	{
+		showLoadingPage();
+		loginService.getLocationByZip( tZipCode );
+
+	}
+
+	function showLoadingPage()
+	{
+		//show loading page
+		$( loadingPage ).removeClass( 'splash-hidden' ).addClass( 'splash-visible' );
+	}
+
 	function displayRestaurants( tData )
 	{
 		//Remove formatting from table
@@ -130,5 +154,55 @@ var loginController = ( function()
 	        "lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
 	        "bRetrieve": true
 	    });
+
+	    isRestaurantsLoaded = true;
+
+	    //check if the rest of the page has loaded (getting rid of loader)
+	    evalPageLoad();
 	}
+
+	function startLoadData()
+	{
+		//show loading page
+		showLoadingPage();
+
+		//get the user location and start the whole process
+		loginService.getLocation();
+	}
+
+	//FOR NOW THIS JUST INFORMS THAT THE EVENTS ARE LOADED (does not actually display)
+	function displayEvents()
+	{
+		isEventsLoaded = true;
+
+		evalPageLoad();
+	}
+
+	function evalPageLoad()
+	{
+		//if all data is loaded and displayed
+		if( isEventsLoaded && isRestaurantsLoaded )
+		{
+			console.log( "YASSSS" );
+
+			//remove loading page
+			$( loadingPage ).removeClass( 'splash-visible' ).addClass( 'splash-hidden' );
+			
+			//toggle fade to the rest
+            var landingPage = $("#landing-page");
+
+            if (landingPage.hasClass("hidden"))
+            {
+                landingPage.removeClass("date-hidden").addClass("visible");
+
+            }
+            else 
+            {
+                landingPage.removeClass("visible").addClass("date-hidden");
+                setTimeout(function(){ landingPage.css( "display","none") },1000 );
+                $("#zip-code-input").val($("#zip-code").val());
+            }
+		}
+	}
+
 })();

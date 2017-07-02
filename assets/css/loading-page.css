@@ -1,0 +1,31 @@
+#loading-page
+{
+	position: absolute;
+
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	bottom: 0px;
+
+	background-color: white;
+
+	z-index: 9999;
+}
+
+.splash-hidden
+{
+	visibility: hidden;
+}
+
+.splash-visible
+{
+	visibility: visible;
+}
+
+.loading-spinner
+{
+	height: 128px;
+	width: 128px;
+	background-size: cover;
+	background-image: url( '../images/loading.gif' );
+}
