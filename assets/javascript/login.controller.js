@@ -136,6 +136,10 @@ var loginController = ( function()
 
 	function displayRestaurants( tData )
 	{
+		//console.log( "restaurant data:" );
+		//console.log( tData );
+		//console.log( tData.length );
+		
 		//Remove formatting from table
 		$("#eats-table").dataTable().fnDestroy();
 		  
@@ -168,7 +172,7 @@ var loginController = ( function()
 		                      + "<p>" + tData[i].formatted_address
 		                      + " - " + tData[i].formatted_phone_number + "</p></td>")); 
 
-		    $("#eats-table tbody").append(row);
+		    $("#eats-table tbody").append( row );
 		}
 
 		//Include Pagination Features
