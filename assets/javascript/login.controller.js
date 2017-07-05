@@ -13,12 +13,12 @@ var loginController = ( function()
 	//=======================
 	var locationButton = document.getElementById( 'login-button' );
 	var locationLandingButton = document.getElementById( 'location-landing-button' );
+	var zipCodeLandingButton = document.getElementById( 'zip-landing-button' );
 	var zipCodeButton = document.getElementById( 'zip-code-button' );
 	var zipCodeInput = document.getElementById( 'zip-code-input' );
 	var zipCodeSplashInput = document.getElementById( 'zip-code' );
 	var zipCodeSplashMessage = document.getElementById( 'zip-code-splashmessage' );
 	var zipCodeLandingMessage = document.getElementById( 'zip-code-landingmessage' );
-	var zipCodeSplashButton = document.getElementById( 'landing-button' );
 
 	//=======================
 	//	Events
@@ -30,6 +30,7 @@ var loginController = ( function()
 	//when the input field changes, check if it's valid input( using an anonymous function so that we can pass parameters )
 	zipCodeInput.addEventListener( 'input', function(){ validateZipCode( zipCodeInput.value.trim() ) } );
 	zipCodeSplashInput.addEventListener( 'input', function(){ validateZipCode( zipCodeSplashInput.value.trim() ) } );
+	zipCodeLandingButton.addEventListener( 'click', function(){ startLoadData( zipCodeSplashInput.value.trim() ) } );
 	
 	//create events
 	eventSystem.registerEvent( 'onEventsLoaded' );
@@ -60,7 +61,7 @@ var loginController = ( function()
 			//Splash Div  - still OK since this will be hidden when going to Main Div
 			zipCodeSplashMessage.style.display = '';
 			zipCodeSplashMessage.innerHTML = "<strong>Only numbers are valid</strong>";
-			zipCodeSplashButton.style.display = 'none';
+			zipCodeLandingButton.style.display = 'none';
 
 			//Main Div
 			zipCodeLandingMessage.style.display = '';
@@ -80,7 +81,7 @@ var loginController = ( function()
 				//Splash Div  - still OK since this will be hidden when going to Main Div
 				zipCodeSplashMessage.style.display = '';
 				zipCodeSplashMessage.innerHTML = "<strong>Not the right length - Enter Only 5 Digits</strong>";
-				zipCodeSplashButton.style.display = 'none';
+				zipCodeLandingButton.style.display = 'none';
 
 				//Main Div
 				zipCodeLandingMessage.style.display = '';
@@ -93,9 +94,30 @@ var loginController = ( function()
 
 		//assuming we've made it this far - the zipcode should be a valid zipcode
 		//soget the zipcode from our service and show the Splash button submit button
-		zipCodeSplashButton.style.display = '';
+		zipCodeLandingButton.style.display = '';
 		zipCodeButton.style.display = '';
-		loginService.getLocationByZip( tZipCode );
+
+		//loginService.getLocationByZip( tZipCode );
+	}
+
+	//get the location of the user and start the data loading
+	function startLoadData( tZipCode )
+	{
+		//show loading page
+		showLoadingPage();
+
+		if( !isNaN( tZipCode ) )
+		{
+			//get location by zipcode
+			loginService.getLocationByZip( tZipCode );
+			console.log( 'getting location with zipCode' );
+		}
+		else
+		{
+			//get the user location based on geo stuff and start the whole process
+			loginService.getLocation();
+			console.log( 'getting location with location services' );
+		}
 	}
 
 	//when you actually press the button
@@ -159,15 +181,6 @@ var loginController = ( function()
 
 	    //check if the rest of the page has loaded (getting rid of loader)
 	    evalPageLoad();
-	}
-
-	function startLoadData()
-	{
-		//show loading page
-		showLoadingPage();
-
-		//get the user location and start the whole process
-		loginService.getLocation();
 	}
 
 	//FOR NOW THIS JUST INFORMS THAT THE EVENTS ARE LOADED (does not actually display)
