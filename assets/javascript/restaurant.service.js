@@ -25,6 +25,7 @@ var restaurantService = ( function()
 	//search based on current user
 	function googleSearchNearby( tUser, tCallback )
 	{
+		console.log("google search started for restaurant");
 		if( tUser != null )
 		{
 			//create new google lat/long object using user data (required by google search api)
@@ -53,28 +54,38 @@ var restaurantService = ( function()
 		//console.log( 'tData = ' + tData );
 		//console.log( 'tStatus = ' + tStatus );
 
-		if ( tStatus == google.maps.places.PlacesServiceStatus.OK )
+		if( tStatus == google.maps.places.PlacesServiceStatus.OK )
 		{
-			console.log("Get Google place Results");
-			console.log(tData);
+			//console.log("Get Google place Results");
+			//console.log(tData);
 
-			for (var i = 0; i < tData.length; i++) 
+			for( var i = 0; i < tData.length; i++ ) 
 			{
 				//Only Reated 3 or Higher
 				if( tData[i].rating > 3 && tData[i].price_level > 1 )
 				{
-					service.getDetails({
-			          placeId: tData[i].place_id
-			        }, function(place, status) {
-			          	if (status === google.maps.places.PlacesServiceStatus.OK) {
-								dateRestaurants.push( place );
-			          	}
+					service.getDetails( { placeId: tData[i].place_id }, function( place, status ) 
+					{
+			          	if( status === google.maps.places.PlacesServiceStatus.OK ) 
+			          	{
+							dateRestaurants.push( place );
+							//console.log( place );
+		          		}
 			        });
 			    }
 			}
 
+			//TODO - this is getting fired bfore the details are loaded
 			eventSystem.dispatchEvent( 'onRestaurantsLoaded', dateRestaurants );
 			//return dateRestaurants;
+		}
+	}
+
+	//TODO finish this
+	function googleDetailResults( tData, tStatus )
+	{
+		if ( tStatus == google.maps.places.PlacesServiceStatus.OK )
+		{
 		}
 	}
 
