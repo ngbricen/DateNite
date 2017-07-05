@@ -11,6 +11,8 @@ var restaurantService = ( function()
 
 	//list of restuarants that meet the date criteria
 	var dateRestaurants = [];
+	var totalRestaurantsFound;
+	var qualifiedRestaurantCount;
 
 	//only the stuff that outside scripts can access
 	var publicAPI = 
@@ -25,7 +27,8 @@ var restaurantService = ( function()
 	//search based on current user
 	function googleSearchNearby( tUser, tCallback )
 	{
-		console.log("google search started for restaurant");
+		//console.log("google search started for restaurant");
+		
 		if( tUser != null )
 		{
 			//create new google lat/long object using user data (required by google search api)
@@ -54,29 +57,32 @@ var restaurantService = ( function()
 		//console.log( 'tData = ' + tData );
 		//console.log( 'tStatus = ' + tStatus );
 
+		//clear the restaurant results and zero out the total restaurant count
+		//totalRestaurantsFound is used for notifying that all the details have been gathered
+		dateRestaurants = [];
+		totalRestaurantsFound = 0;
+		qualifiedRestaurantCount = 0;
+
 		if( tStatus == google.maps.places.PlacesServiceStatus.OK )
 		{
 			//console.log("Get Google place Results");
 			//console.log(tData);
+			//totalRestaurantsFound = tData.length - 1;
 
-			for( var i = 0; i < tData.length; i++ ) 
+			for( var i = 0; i < tData.length; ++i ) 
 			{
 				//Only Reated 3 or Higher
 				if( tData[i].rating > 3 && tData[i].price_level > 1 )
 				{
-					service.getDetails( { placeId: tData[i].place_id }, function( place, status ) 
-					{
-			          	if( status === google.maps.places.PlacesServiceStatus.OK ) 
-			          	{
-							dateRestaurants.push( place );
-							//console.log( place );
-		          		}
-			        });
+					//get the results of the restaurants
+					service.getDetails( { placeId: tData[i].place_id }, googleDetailResults );
+					//qualifiedRestaurantCount++;
+					totalRestaurantsFound++;
 			    }
 			}
 
 			//TODO - this is getting fired bfore the details are loaded
-			eventSystem.dispatchEvent( 'onRestaurantsLoaded', dateRestaurants );
+			//eventSystem.dispatchEvent( 'onRestaurantsLoaded', dateRestaurants );
 			//return dateRestaurants;
 		}
 	}
@@ -84,11 +90,26 @@ var restaurantService = ( function()
 	//TODO finish this
 	function googleDetailResults( tData, tStatus )
 	{
+		//if we could get the data, push it to the total number of restaurants
 		if ( tStatus == google.maps.places.PlacesServiceStatus.OK )
 		{
+			dateRestaurants.push( tData );
 		}
-	}
+		else
+		{
+			//could not get the data (status was not success) - remove one total restaurant
+			--totalRestaurantsFound;
+		}
 
+		//if we've gotten details for all the restaurants
+		if( totalRestaurantsFound == dateRestaurants.length )
+		{
+			//console.log( 'restaurants loaded event dispatched' );
+			eventSystem.dispatchEvent( 'onRestaurantsLoaded', dateRestaurants );
+		}
+
+		//console.log( "total = " + totalRestaurantsFound + " and data for = " + dateRestaurants.length );
+	}
 })();
 
 //ZOMATO REQUEST OBJECT

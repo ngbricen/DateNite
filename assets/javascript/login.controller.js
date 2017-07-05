@@ -136,9 +136,9 @@ var loginController = ( function()
 
 	function displayRestaurants( tData )
 	{
-		console.log( "restaurant data:" );
-		console.log( tData );
-		console.log( tData.length );
+		//console.log( "restaurant data:" );
+		//console.log( tData );
+		//console.log( tData.length );
 		
 		//Remove formatting from table
 		$("#eats-table").dataTable().fnDestroy();
