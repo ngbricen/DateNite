@@ -113,9 +113,10 @@ var loginService = ( function()
 			user = new User( null, tPosition.lat, tPosition.lng, tPosition.zip_code );
     	}
 
+    	//inform whoever needs to know that a new user was created
     	eventSystem.dispatchEvent( 'onUserCreated', user );
 
-    	//returns the user at the global scope
+    	//returns the user at the global scope (not sure if still necessary) 
 	    return user;
 	}
 

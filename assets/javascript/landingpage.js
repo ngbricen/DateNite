@@ -9,7 +9,7 @@ $(document).ready(function()
 
 function hideLoginContent()
 {
-     var landingPage = $( "#landing-content" );
+     var landingPage = $( "#landing-page" );
 
     if( landingPage.hasClass( "hidden" ) )
     {
@@ -18,9 +18,7 @@ function hideLoginContent()
     else
     {
         landingPage.removeClass( "visible" ).addClass( "date-hidden" );
-        setTimeout(function(){ landingPage.css( "display","none" ) }, 1000 );
+        setTimeout(function(){ landingPage.css( "display", "none" ) }, 1000 );
         $( "#zip-code-input" ).val( $("#zip-code").val() );
     }
 }
-
-
