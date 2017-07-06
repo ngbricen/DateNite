@@ -112,9 +112,12 @@ img{
     overflow: auto;
 }
 
+.panel-body {
+  background-color: orange;
+}
 
 .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
-   background-color: khaki;
+   background-color: #BDC3C7;
 }
 
 tr{
