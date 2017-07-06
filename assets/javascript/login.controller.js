@@ -103,8 +103,12 @@ var loginController = ( function()
 	//get the location of the user and start the data loading
 	function startLoadData( tZipCode )
 	{
+		isRestaurantsLoaded = false;
+		isEventsLoaded = false;
+
 		//show loading page
-		showLoadingPage();
+		showLoadingPage( true );
+		showMainPage( false );
 
 		if( !isNaN( tZipCode ) )
 		{
@@ -121,18 +125,12 @@ var loginController = ( function()
 	}
 
 	//when you actually press the button
-	function loginZipCode( tZipCode )
-	{
-		showLoadingPage();
-		loginService.getLocationByZip( tZipCode );
+	// function loginZipCode( tZipCode )
+	// {
+	// 	showLoadingPage();
+	// 	loginService.getLocationByZip( tZipCode );
 
-	}
-
-	function showLoadingPage()
-	{
-		//show loading page
-		$( loadingPage ).removeClass( 'splash-hidden' ).addClass( 'splash-visible' );
-	}
+	// }
 
 	function displayRestaurants( tData )
 	{
@@ -157,6 +155,7 @@ var loginController = ( function()
 		    // Creating and storing an image tag
 		    var eventImage = $("<img>");
 
+		    //TODO get real image
 		    // Setting the src attribute of the image to a property pulled off the result item
 		    eventImage.attr("src", "./assets/images/restaurant.jpg");
 
@@ -200,26 +199,65 @@ var loginController = ( function()
 		//if all data is loaded and displayed
 		if( isEventsLoaded && isRestaurantsLoaded )
 		{
-			console.log( "YASSSS" );
+			console.log( "all data has loaded" );
 
-			//remove loading page
-			$( loadingPage ).removeClass( 'splash-visible' ).addClass( 'splash-hidden' );
-			
-			//toggle fade to the rest
-            var landingPage = $("#landing-page");
+			//turn off the loading page
+			showLoadingPage( false );
+			showMainPage( true );
 
-            if (landingPage.hasClass("hidden"))
-            {
-                landingPage.removeClass("date-hidden").addClass("visible");
-
-            }
-            else 
-            {
-                landingPage.removeClass("visible").addClass("date-hidden");
-                setTimeout(function(){ landingPage.css( "display","none") },1000 );
-                $("#zip-code-input").val($("#zip-code").val());
-            }
+			//toggleLandingPage();
 		}
 	}
 
+	function showLoadingPage( tIsVisible )
+	{
+		if( tIsVisible )
+		{
+			//$( loadingPage ).css( "display", "block" );
+			$( loadingPage ).removeClass( 'splash-hidden' ).addClass( 'splash-visible' );
+		}
+		else
+		{
+			$( loadingPage ).removeClass( 'splash-visible' ).addClass( 'splash-hidden' );
+
+			//set to not block after a second
+			//setTimeout( function() { $( loadingPage ).css( "display", "none" ) }, 1000 );
+		}
+	}
+
+	function showMainPage( tIsVisible )
+	{
+		if( tIsVisible )
+		{
+			$( '#main-page' ).css( 'visibility', 'visible' );
+		}
+		else
+		{
+			$( '#main-page' ).css( 'visibility', 'hidden' );
+		}
+	}
+
+	function toggleLandingPage()
+	{
+		//toggle fade to the rest
+        var landingPage = $( "#landing-page" );
+
+        if( landingPage.hasClass( "date-hidden" ) )
+        {
+        	//if the page is hidden, make it visible
+        	landingPage.css( "display","block" );
+            landingPage.removeClass( "date-hidden" ).addClass( "visible" );
+        }
+        else 
+        {
+        	//start the transition to fade out
+            landingPage.removeClass( "visible" ).addClass( "date-hidden" );
+
+            //turn the actual element off (so it no longer blocks input) in a second)
+            setTimeout( function(){ landingPage.css( "display", "none" ) }, 1000 );
+
+            //update the main pages zip value (so the user knows what zip they used)
+            $( "#zip-code-input" ).val( $( "#zip-code" ).val() );
+        }
+	}
 })();
