@@ -128,6 +128,9 @@ var loginController = ( function()
 
 	function displayRestaurants( tData )
 	{	
+		console.log( "the data is: " );
+		console.log( tData );
+		//console.log( tData[1].photos[0].getUrl( { maxWidth: '100', maxHeight: '100' } ) );
 		//Remove formatting from table
 		$("#eats-table").dataTable().fnDestroy();
 		  
@@ -146,8 +149,16 @@ var loginController = ( function()
 		    var eventImage = $("<img>");
 
 		    //TODO get real image
+		    var tempImageUrl = "./assets/images/restaurant.jpg";
+
+		    //if the photos exist - get the url
+		    if( tData[i].photos[0] != null )
+	    	{
+	    		tempImageUrl = tData[i].photos[0].getUrl( { maxWidth: '150', maxHeight: '150' } );
+	    	}
+
 		    // Setting the src attribute of the image to a property pulled off the result item
-		    eventImage.attr("src", "./assets/images/restaurant.jpg");
+		    eventImage.attr( "src", tempImageUrl );
 
 		    //Setting all other images variables
 		    eventImage.addClass("image");
