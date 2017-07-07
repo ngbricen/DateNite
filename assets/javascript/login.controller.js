@@ -42,7 +42,7 @@ var loginController = ( function()
 	
 	//VIA BUTTON
 	//using an anonymous function so that we can pass a parameter
-	//zipCodeButton.addEventListener( 'click', function(){ loginService.getLocationByZip( zipCodeInput.value.trim() ) } );
+	zipCodeButton.addEventListener( 'click', function(){ startLoadData( zipCodeInput.value.trim() ) } );
 
 	//=======================
 	//	Methods
@@ -57,17 +57,7 @@ var loginController = ( function()
 		//check if the user is entering characters other than values
 		if( isNaN( tZipCode ) )
 		{
-			//console.log( "only numbers are valid" );
-			//Splash Div  - still OK since this will be hidden when going to Main Div
-			zipCodeSplashMessage.style.display = '';
-			zipCodeSplashMessage.innerHTML = "<strong>Only numbers are valid</strong>";
-			zipCodeLandingButton.style.display = 'none';
-
-			//Main Div
-			zipCodeLandingMessage.style.display = '';
-			zipCodeLandingMessage.innerHTML = "<strong>Only numbers are valid</strong>";
-			zipCodeButton.style.display = 'none';
-
+			hideLoginButtons( "Only numbers are valid" );
 			//end the function here
 			return;
 		}
@@ -76,17 +66,9 @@ var loginController = ( function()
 		if( tZipCode.toString().length !== 5 )
 		{
 			//console.log( "not the right length" );
-			if(tZipCode.toString().length > 5){
-
-				//Splash Div  - still OK since this will be hidden when going to Main Div
-				zipCodeSplashMessage.style.display = '';
-				zipCodeSplashMessage.innerHTML = "<strong>Not the right length - Enter Only 5 Digits</strong>";
-				zipCodeLandingButton.style.display = 'none';
-
-				//Main Div
-				zipCodeLandingMessage.style.display = '';
-				zipCodeLandingMessage.innerHTML = "<strong>Not the right length - Enter Only 5 Digits</strong>";
-				zipCodeButton.style.display = 'none';
+			if( tZipCode.toString().length > 5 || tZipCode.toString().length < 5 )
+			{
+				hideLoginButtons();
 			}
 
 			return;
@@ -100,11 +82,31 @@ var loginController = ( function()
 		//loginService.getLocationByZip( tZipCode );
 	}
 
+	function hideLoginButtons( tErrorMessage )
+	{
+		//Splash Div Buttons
+		zipCodeSplashMessage.style.display = '';
+		zipCodeLandingButton.style.display = 'none';
+
+		//Main Div Buttons
+		zipCodeLandingMessage.style.display = '';
+		zipCodeButton.style.display = 'none';
+
+		//if you've passed in a error message, display it
+		if( tErrorMessage != null )
+		{
+			zipCodeLandingMessage.innerHTML = "<strong>" + tErrorMessage + "</strong>";
+			zipCodeSplashMessage.innerHTML = "<strong>" + tErrorMessage + "</strong>";
+		}
+	}
+
 	//get the location of the user and start the data loading
 	function startLoadData( tZipCode )
 	{
 		isRestaurantsLoaded = false;
 		isEventsLoaded = false;
+
+		hideLoginButtons();
 
 		//show loading page
 		showLoadingPage( true );
@@ -124,20 +126,8 @@ var loginController = ( function()
 		}
 	}
 
-	//when you actually press the button
-	// function loginZipCode( tZipCode )
-	// {
-	// 	showLoadingPage();
-	// 	loginService.getLocationByZip( tZipCode );
-
-	// }
-
 	function displayRestaurants( tData )
-	{
-		//console.log( "restaurant data:" );
-		//console.log( tData );
-		//console.log( tData.length );
-		
+	{	
 		//Remove formatting from table
 		$("#eats-table").dataTable().fnDestroy();
 		  
@@ -203,9 +193,9 @@ var loginController = ( function()
 
 			//turn off the loading page
 			showLoadingPage( false );
-			showMainPage( true );
 
-			//toggleLandingPage();
+			//show main page
+			showMainPage( true );
 		}
 	}
 
@@ -235,6 +225,9 @@ var loginController = ( function()
 		{
 			$( '#main-page' ).css( 'visibility', 'hidden' );
 		}
+
+		//determine if we should show the zip code button
+		validateZipCode( zipCodeInput.value.trim() );
 	}
 
 	function toggleLandingPage()
