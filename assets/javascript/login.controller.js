@@ -126,20 +126,8 @@ var loginController = ( function()
 		}
 	}
 
-	//when you actually press the button
-	// function loginZipCode( tZipCode )
-	// {
-	// 	showLoadingPage();
-	// 	loginService.getLocationByZip( tZipCode );
-
-	// }
-
 	function displayRestaurants( tData )
-	{
-		//console.log( "restaurant data:" );
-		//console.log( tData );
-		//console.log( tData.length );
-		
+	{	
 		//Remove formatting from table
 		$("#eats-table").dataTable().fnDestroy();
 		  
@@ -205,9 +193,9 @@ var loginController = ( function()
 
 			//turn off the loading page
 			showLoadingPage( false );
-			showMainPage( true );
 
-			//toggleLandingPage();
+			//show main page
+			showMainPage( true );
 		}
 	}
 
@@ -237,6 +225,9 @@ var loginController = ( function()
 		{
 			$( '#main-page' ).css( 'visibility', 'hidden' );
 		}
+
+		//determine if we should show the zip code button
+		validateZipCode( zipCodeInput.value.trim() );
 	}
 
 	function toggleLandingPage()
