@@ -34,7 +34,7 @@
         <div>
         	<button id="location-landing-button" style="margin-bottom: 6px;" class="submit">Use Location</button>
         </div>
-        <input class="zip-input" type="text" id="zip-code" name="zip-code" placeholder="Enter Zip Code">
+        <input class="zip-input" type="text" id="zip-code" name="zip-code" placeholder="Enter Zip Code" maxlength="5">
         <div>
           <span id="zip-code-splashmessage"></span>
         </div>        
@@ -63,9 +63,9 @@
           <div class="col-xs-6 col-md-4">
             <div class="input-group">
               
-              <input type="text" id="zip-code-input" class="zipcode-input" name="zip-code-input" placeholder="Enter Zip Code">
+              <input type="text" id="zip-code-input" class="zipcode-input" name="zip-code-input" placeholder="Enter Zip Code" maxlength="5">
               <span class="input-group-btn">
-                <button class="btn btn-default submit-button" type="button" id="zip-code-button">Submit</button>
+                <button class="btn btn-default submit-button" type="button" id="zip-code-button" style="display: none">Submit</button>
               </span>
               <button class="btn btn-danger submit-button" id="login-button">use location</button>
             </div><!-- /input-group -->

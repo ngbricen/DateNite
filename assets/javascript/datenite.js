@@ -115,8 +115,8 @@ function callEventBrite(queryURL){
   }).done(function(response) {
     var results = response.events;
 
-    console.log(queryURL);
-    console.log(results);
+    //console.log(queryURL);
+    //console.log(results);
     
     for (var i = 0; i < results.length; i++) {
 
