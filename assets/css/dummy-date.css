@@ -1,4 +1,4 @@
-.landing{
+.landing {
 	margin-top: 210px;
 }
 
@@ -6,8 +6,8 @@
   text-align: center;
   color: white;
   margin: 0px;
- 
 }
+
 .description {
   text-align: center;
   color: white;
@@ -20,27 +20,60 @@
 	font-family: 'Leckerli One', cursive;
 	margin: 0px;
 }
+
 .zip-input {
 	height: 40px;
-	width: 400px;
-	margin-bottom: 7px;
+	width: 450px;
+/*	margin-bottom: 6px;*/
 	text-align: center;
-	font-size: 17px;
-	border-radius: 10px;
-	color: black;
+	font-size: 16px;
+	/*border-radius: 10px;*/
+	border: 0px solid transparent;
+	color: #333;
 }
 
 .submit {
-	background-color: rgb(216,45,45);
+	background-color: rgb( 216, 45, 45 );
 	height: 40px;
-	width: 300px;
-	font-size: 15px;
-	border-radius: 10px;
+	width: 450px;
+	font-size: 16px;
+	border: 0px solid transparent;
+	/*border-radius: 10px 10px 0px 0px;*/
+
+    background: red; /*fallback*/
+    background: -webkit-linear-gradient( #d73c2d, #b52222 ); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient( #d73c2d, #b52222 ); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient( #d73c2d, #b52222 ); /* For Firefox 3.6 to 15 */
+    background: linear-gradient( #d73c2d, #b52222 ); /* Standard syntax */
+}
+
+#location-landing-button
+{
+	border-radius: 10px 10px 0px 0px;
+}
+
+#zip-landing-button
+{
+	border-radius: 0px 0px 10px 10px;
 }
 
 .date-hidden {
 	opacity: 0;
 	transition: all 1s;
+}
+
+.landing-hidden
+{
+	height: 0px;
+	opacity: 0;
+	transition: all .3s;
+}
+
+.landing-visible
+{
+	height: 40px;
+	opacity: 1;
+	transition: all .3s;
 }
 
 .visible {
@@ -54,7 +87,7 @@
 }
 
 #main-page, #landing-page {
-	background-image:url(../images/City-Background2.jpg);
+	background-image: url( ../images/City-Background2.jpg );
 	background-size: 100%;
 	background-repeat: no-repeat;
 	position: fixed;
