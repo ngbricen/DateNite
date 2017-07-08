@@ -26,9 +26,7 @@ var restaurantService = ( function()
 
 	//search based on current user
 	function googleSearchNearby( tUser, tCallback )
-	{
-		//console.log("google search started for restaurant");
-		
+	{		
 		if( tUser != null )
 		{
 			//create new google lat/long object using user data (required by google search api)
@@ -54,9 +52,6 @@ var restaurantService = ( function()
 
 	function googleSearchResults( tData, tStatus )
 	{
-		//console.log( 'tData = ' + tData );
-		//console.log( 'tStatus = ' + tStatus );
-
 		//clear the restaurant results and zero out the total restaurant count
 		//totalRestaurantsFound is used for notifying that all the details have been gathered
 		dateRestaurants = [];
@@ -65,10 +60,6 @@ var restaurantService = ( function()
 
 		if( tStatus == google.maps.places.PlacesServiceStatus.OK )
 		{
-			//console.log("Get Google place Results");
-			//console.log(tData);
-			//totalRestaurantsFound = tData.length - 1;
-
 			for( var i = 0; i < tData.length; ++i ) 
 			{
 				//Only Reated 3 or Higher
@@ -76,14 +67,9 @@ var restaurantService = ( function()
 				{
 					//get the results of the restaurants
 					service.getDetails( { placeId: tData[i].place_id }, googleDetailResults );
-					//qualifiedRestaurantCount++;
 					totalRestaurantsFound++;
 			    }
 			}
-
-			//TODO - this is getting fired bfore the details are loaded
-			//eventSystem.dispatchEvent( 'onRestaurantsLoaded', dateRestaurants );
-			//return dateRestaurants;
 		}
 	}
 
@@ -104,11 +90,8 @@ var restaurantService = ( function()
 		//if we've gotten details for all the restaurants
 		if( totalRestaurantsFound == dateRestaurants.length )
 		{
-			//console.log( 'restaurants loaded event dispatched' );
 			eventSystem.dispatchEvent( 'onRestaurantsLoaded', dateRestaurants );
 		}
-
-		//console.log( "total = " + totalRestaurantsFound + " and data for = " + dateRestaurants.length );
 	}
 })();
 

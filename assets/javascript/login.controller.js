@@ -75,13 +75,10 @@ var loginController = ( function()
 		}
 
 		//assuming we've made it this far - the zipcode should be a valid zipcode
-		//soget the zipcode from our service and show the Splash button submit button
-		//zipCodeLandingButton.style.display = '';
+		//so get the zipcode from our service and show the Splash button submit button
 		$( zipCodeLandingButton ).removeClass( 'landing-hidden' );
 		$( zipCodeLandingButton ).addClass( 'landing-visible' );
 		zipCodeButton.style.display = '';
-
-		//loginService.getLocationByZip( tZipCode );
 	}
 
 	function hideLoginButtons( tErrorMessage )
@@ -211,15 +208,11 @@ var loginController = ( function()
 	{
 		if( tIsVisible )
 		{
-			//$( loadingPage ).css( "display", "block" );
 			$( loadingPage ).removeClass( 'splash-hidden' ).addClass( 'splash-visible' );
 		}
 		else
 		{
 			$( loadingPage ).removeClass( 'splash-visible' ).addClass( 'splash-hidden' );
-
-			//set to not block after a second
-			//setTimeout( function() { $( loadingPage ).css( "display", "none" ) }, 1000 );
 		}
 	}
 
