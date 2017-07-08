@@ -115,8 +115,8 @@ function callEventBrite(queryURL){
   }).done(function(response) {
     var results = response.events;
 
-    console.log(queryURL);
-    console.log(results);
+    //console.log(queryURL);
+    //console.log(results);
     
     for (var i = 0; i < results.length; i++) {
 
@@ -165,6 +165,9 @@ function callEventBrite(queryURL){
         "lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
         "bRetrieve": true
     });
+
+    //event to inform that the events have been loaded
+    eventSystem.dispatchEvent( 'onEventsLoaded' );
 
   });
 

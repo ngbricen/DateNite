@@ -1,0 +1,63 @@
+#loading-page
+{
+	position: absolute;
+
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	bottom: 0px;
+
+	/*background-color: white;*/
+	background-image:url(../images/City-Background2.jpg);
+	background-size: 100%;
+	background-repeat: no-repeat;
+
+	z-index: 9999;
+}
+
+#background-image
+{	
+	position: absolute;
+
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	bottom: 0px;
+
+	/*background-color: white;*/
+	background-image:url(../images/City-Background2.jpg);
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+
+.splash-hidden, .splash-visible
+{
+	transition: all 1s;
+	-webkit-transition: all 1s;
+	-moz-transition: all 1s;
+}
+
+.splash-hidden
+{
+	visibility: hidden;
+	opacity: 0;
+}
+
+.splash-visible
+{
+	visibility: visible;
+	opacity: 1;
+}
+
+.loading-spinner
+{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	height: 128px;
+	width: 128px;
+	background-size: cover;
+	background-image: url( '../images/loading02.gif' );
+}
