@@ -1,20 +1,24 @@
-$(document).ready(function(){
+$(document).ready(function()
+{
+    //Start by hiding the Submit button
+    $( '#zip-landing-button' ).hide();
 
-        //Start by hiding the Submit button
-        $('#landing-button').hide();
+    $( '#zip-landing-button' ).click( function() { hideLoginContent() } );
+    $( '#location-landing-button' ).click( function() { hideLoginContent() } );
+});
 
-        $('#landing-button').click(function() {
-            var landingPage = $("#landing-page");
+function hideLoginContent()
+{
+     var landingPage = $( "#landing-page" );
 
-            if (landingPage.hasClass("hidden")) {
-                landingPage.removeClass("date-hidden").addClass("visible");
-
-            } else {
-                landingPage.removeClass("visible").addClass("date-hidden");
-                setTimeout(function(){
-                	landingPage.css("display","none")
-                },1000);
-                $("#zip-code-input").val($("#zip-code").val());
-            }
-        });
-    });
+    if( landingPage.hasClass( "hidden" ) )
+    {
+        landingPage.removeClass( "date-hidden" ).addClass( "visible" );
+    } 
+    else
+    {
+        landingPage.removeClass( "visible" ).addClass( "date-hidden" );
+        setTimeout(function(){ landingPage.css( "display", "none" ) }, 1000 );
+        $( "#zip-code-input" ).val( $("#zip-code").val() );
+    }
+}
