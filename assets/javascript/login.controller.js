@@ -76,7 +76,9 @@ var loginController = ( function()
 
 		//assuming we've made it this far - the zipcode should be a valid zipcode
 		//soget the zipcode from our service and show the Splash button submit button
-		zipCodeLandingButton.style.display = '';
+		//zipCodeLandingButton.style.display = '';
+		$( zipCodeLandingButton ).removeClass( 'landing-hidden' );
+		$( zipCodeLandingButton ).addClass( 'landing-visible' );
 		zipCodeButton.style.display = '';
 
 		//loginService.getLocationByZip( tZipCode );
@@ -86,7 +88,9 @@ var loginController = ( function()
 	{
 		//Splash Div Buttons
 		zipCodeSplashMessage.style.display = '';
-		zipCodeLandingButton.style.display = 'none';
+		$( zipCodeLandingButton ).removeClass( 'landing-visible' );
+		$( zipCodeLandingButton ).addClass( 'landing-hidden' );
+		//zipCodeLandingButton.style.display = 'none';
 
 		//Main Div Buttons
 		zipCodeLandingMessage.style.display = '';
