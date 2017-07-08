@@ -1,7 +1,7 @@
 $(document).ready(function()
 {
     //Start by hiding the Submit button
-    $( '#zip-landing-button' ).hide();
+    // $( '#zip-landing-button' ).hide();
 
     $( '#zip-landing-button' ).click( function() { hideLoginContent() } );
     $( '#location-landing-button' ).click( function() { hideLoginContent() } );
