@@ -129,10 +129,10 @@ var loginController = ( function()
 	function displayRestaurants( tData )
 	{	
 		//Remove formatting from table
-		$("#eats-table").dataTable().fnDestroy();
+		$( "#eats-table" ).dataTable().fnDestroy();
 		  
 		//Empty table
-		$("#eats-table tbody").empty();
+		$( "#eats-table tbody" ).empty();
 
 		//console.log( eatsView );
 		for( var i = 0; i < tData.length; ++i )
@@ -140,32 +140,36 @@ var loginController = ( function()
 			var row = $("<tr>");
 
 		    //Adding Class to the row, which could be usd for an on click event
-		    row.addClass("specificEvent");
+		    row.addClass( "specificEvent" );
 
-		    // Creating and storing an image tag
-		    var eventImage = $("<img>");
+		    //backup image in case nothing is loaded
+		    var tempImageUrl = "./assets/images/restaurant.jpg";
 
-		    //TODO get real image
-		    // Setting the src attribute of the image to a property pulled off the result item
-		    eventImage.attr("src", "./assets/images/restaurant.jpg");
+		    //if the photos exist - get the url
+		    if( tData[i].photos[0] != null )
+	    	{
+	    		var tempGoogleImageUrl = tData[i].photos[0].getUrl( { maxWidth: '100', maxHeight: '100' } );
+	    		
+	    		//make sure we actully got an image
+	    		if( tempGoogleImageUrl != null )
+    			{
+    				tempImageUrl = tempGoogleImageUrl;
+    			}
+	    	}
 
-		    //Setting all other images variables
-		    eventImage.addClass("image");
-
-		    //Adding row to the table
-		    row.append($("<td class ='image'>" + "<img src='./assets/images/restaurant.jpg' class='image'>" + "</td>"));
+		   	row.append($("<td class ='image'>" + "<img src='" + tempImageUrl + "' class='image'>" + "</td>"));
 		    row.append($("<td class = 'details' event-id =" + tData[i].place_id + ">" 
-		                      + "<strong>Rating " + tData[i].rating + "</strong>" 
-		                      + "<p><a href='" + tData[i].website + "' target='_blank'></p>" 
-		                      + tData[i].name + "</a>" 
+		                      + "<p><a href='" + tData[i].website + "' target='_blank'></p>"
+		                      + tData[i].name + "</a>"
+		                      + "<p><strong>Rating " + tData[i].rating + "</strong></p>" 
 		                      + "<p>" + tData[i].formatted_address
 		                      + " - " + tData[i].formatted_phone_number + "</p></td>")); 
 
-		    $("#eats-table tbody").append( row );
+		    $( "#eats-table tbody" ).append( row );
 		}
 
 		//Include Pagination Features
-	    $("#eats-table").DataTable({
+	    $( "#eats-table" ).DataTable({
 	        "lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
 	        "bRetrieve": true
 	    });
@@ -176,7 +180,7 @@ var loginController = ( function()
 	    evalPageLoad();
 	}
 
-	//FOR NOW THIS JUST INFORMS THAT THE EVENTS ARE LOADED (does not actually display)
+	//INFORMS THAT THE EVENTS ARE LOADED (does not actually display)
 	function displayEvents()
 	{
 		isEventsLoaded = true;
