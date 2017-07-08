@@ -1,12 +1,11 @@
 //DUNCAN IARIA
 
-//this might handle user log in and geolocation gathering
+//this handles user log in and geolocation gathering
 //so that the user does not have to use zip code unless they are uptight about their geolocation
+//ngbricen.github.io
 
 //TODO
 //add error handling for api ajax request
-//url for testing = https://www.zipcodeapi.com/rest/sQ8TmdgmloK621rldEfKmRs6UEf6vc5Y3eSpr8MMwwTzxlUL09wn1YtVCI28V76Y/info.json/30312/radians
-//ngbricen.github.io
 
 //=======================
 //	Login
@@ -101,7 +100,7 @@ var loginService = ( function()
 	//prove that we got a location
 	function createUser( tPosition )
 	{  	
-		console.log( tPosition );
+		//console.log( tPosition );
 		//check if the postition object has the 'coords' object
 		if( 'coords' in tPosition )
 		{
