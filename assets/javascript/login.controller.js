@@ -147,7 +147,7 @@ var loginController = ( function()
 		    var tempImageUrl = "./assets/images/restaurant.jpg";
 
 		    //if the photos exist - get the url
-		    if( tData[i].photos[0] != null )
+		    if( tData[i].photos != null && tData[i].photos[0] != null )
 	    	{
 	    		var tempGoogleImageUrl = tData[i].photos[0].getUrl( { maxWidth: '100', maxHeight: '100' } );
 	    		
