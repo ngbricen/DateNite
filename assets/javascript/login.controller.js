@@ -163,11 +163,11 @@ var loginController = ( function()
 
 		   	row.append($("<td class ='image'>" + "<img src='" + tempImageUrl + "' class='image'>" + "</td>"));
 		    row.append($("<td class = 'details' event-id =" + tData[i].place_id + ">" 
-		                      + "<p><a href='" + tData[i].website + "' target='_blank'></p>"
+		                      + "<a href='" + tData[i].website + "' target='_blank'>"
 		                      + tData[i].name + "</a>"
 		                      + "<p><strong>Rating " + tData[i].rating + "</strong></p>" 
-		                      + "<p>" + tData[i].formatted_address
-		                      + " - " + tData[i].formatted_phone_number + "</p></td>")); 
+		                      + tData[i].formatted_address
+		                      + " - " + tData[i].formatted_phone_number + "</td>")); 
 
 		    $( "#eats-table tbody" ).append( row );
 		}

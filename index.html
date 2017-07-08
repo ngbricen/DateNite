@@ -10,14 +10,16 @@
   <link rel="stylesheet" type="text/css" href="assets/css/loading-page.css">
   <link href="https://fonts.googleapis.com/css?family=Leckerli+One" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="assets/css/date.css">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-2.2.4/dt-1.10.15/datatables.min.css"/>
+  <link rel="stylesheet" type="text/css" href="assets/css/date.css">
   <!-- MOMENT.JS -->
   <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
   <!-- JQUERY -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- BOOTSTRAP.JS -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <!-- GOOGLE CORS -->
-  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdmUNFEGU6RNQ-4TavaviCMlyWKX9q09k&libraries=places"></script>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJJLGq-RKFWKTEAL9hyToo74_1N4l6U_E&libraries=places"></script>
 </head>
 
 
@@ -64,12 +66,11 @@
           </div>
           <div class="col-xs-6 col-md-4">
             <div class="input-group">
-              
               <input type="text" id="zip-code-input" class="zipcode-input" name="zip-code-input" placeholder="Enter Zip Code" maxlength="5">
-              <span class="input-group-btn">
-                <button class="btn btn-default submit-button" type="button" id="zip-code-button" style="display: none">Submit</button>
-              </span>
-              <button class="btn btn-danger submit-button" id="login-button">use location</button>
+              <div class="input-group-btn">
+                <button class="submit-button btn" id="zip-code-button">Submit</button>
+                <button class="submit-button btn" id="login-button">Use Location</button>
+              </div>
             </div><!-- /input-group -->
           </div>
         </div>
