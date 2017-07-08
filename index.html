@@ -5,18 +5,19 @@
 	<title>DateNite</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="assets/css/dummy-date.css">
   <link rel="stylesheet" type="text/css" href="assets/css/loading-page.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-2.2.4/dt-1.10.15/datatables.min.css"/>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Leckerli+One" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="assets/css/date.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-2.2.4/dt-1.10.15/datatables.min.css"/>
+  <!-- MOMENT.JS -->
+  <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+  <!-- JQUERY -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <!-- GOOGLE CORS -->
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdmUNFEGU6RNQ-4TavaviCMlyWKX9q09k&libraries=places"></script>
-
 </head>
 
 
@@ -31,15 +32,16 @@
       </div>
       <div class="description">
         <h1>Plan an exciting nite for you and your Date!</h1>
+        <br/>
         <div>
-        	<button id="location-landing-button" style="margin-bottom: 6px;" class="submit">Use Location</button>
+        	<button id="location-landing-button" class="submit">Use Location</button>
         </div>
         <input class="zip-input" type="text" id="zip-code" name="zip-code" placeholder="Enter Zip Code" maxlength="5">
         <div>
           <span id="zip-code-splashmessage"></span>
         </div>        
         <div>    
-          <button id="zip-landing-button" class="submit">Submit</button>
+          <button id="zip-landing-button" class="submit landing-hidden">Submit</button>
         </div>
       </div>
     </div> 
@@ -194,11 +196,8 @@
 <script src="assets/javascript/login.controller.js"></script>
 <script src="assets/javascript/landingpage.js"></script>
 
-<!-- EVENTS -->
 <script type="text/javascript" src="assets/javascript/datenite.js"></script> 
-
-<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>  
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-2.2.4/dt-1.10.15/datatables.min.js"></script>
-<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>    
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>   -->    
 </body>
 </html>
