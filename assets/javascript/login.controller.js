@@ -38,7 +38,7 @@ var loginController = ( function()
 	//subscribe to the custom onUserCreated event
 	eventSystem.addEventListener( 'onUserCreated', restaurantService.googleSearchNearby );
 	eventSystem.addEventListener( 'onRestaurantsLoaded', displayRestaurants );
-	eventSystem.addEventListener( 'onEventsLoaded', displayEvents ); 
+	eventSystem.addEventListener( 'onEventsLoaded', displayEvents );
 	
 	//VIA BUTTON
 	//using an anonymous function so that we can pass a parameter
@@ -184,6 +184,7 @@ var loginController = ( function()
 	//INFORMS THAT THE EVENTS ARE LOADED (does not actually display)
 	function displayEvents()
 	{
+		console.log( 'display events triggered' );
 		isEventsLoaded = true;
 
 		evalPageLoad();

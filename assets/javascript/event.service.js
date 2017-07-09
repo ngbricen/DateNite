@@ -22,7 +22,23 @@ Event.prototype.registerCallback = function( tCallback )
 Event.prototype.unregisterCallback = function( tCallback )
 {
 	//console.log( this.callbacks.indexOf( tCallback ) );
-	//this.callbacks.splice( this.callbacks.indexOf)
+	//this.callbacks.splice( this.callbacks.indexOf );
+	for( var i = this.callbacks.length - 1; i >= 0; --i )
+	{
+		console.log( this.callbacks[i] );
+		if( this.callbacks[i] === tCallback )
+		{
+			console.log( "yes they match" );
+			//there is a match - go ahead and remove the event
+			this.callbacks.splice( i, 1 );
+		}
+		else
+		{
+			console.log( "no callbacks matched - unable to remove" );
+		}
+	}
+
+	console.log( this.callbacks );
 }
 
 //=======================
@@ -100,10 +116,18 @@ EventSystem.prototype.addEventListener = function( tEventName, tCallback )
 	this.events[tEventName].registerCallback( tCallback );
 };
 
-//TODO implement remove event listener logic
+//TODO implement remove event listener logic ( removing an individual callback from an event )
 EventSystem.prototype.removeEventListener = function( tEventName, tCallback )
 {
 	//this.events[tEventName].unregisterCallback( tCallback );
+	if( this.events[tEventName] != null )
+	{
+		this.events[tEventName].unregisterCallback( tCallback );
+	}
+	else
+	{
+		console.log( "no event by the name exists - could not remove event listener" );
+	}
 }
 
 //=======================
