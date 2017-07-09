@@ -1,6 +1,7 @@
 //TODO
-//Add ability to cleanly remove events and event subscriptions
-//To prevent memory leaks
+//fully test removing callbacks/removing events
+//if a whole event is removed - i assume the callbacks go with it
+//not 100% sure though
 
 //=======================
 //	Events
